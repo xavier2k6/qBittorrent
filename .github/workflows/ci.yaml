@@ -7,7 +7,7 @@ name: GitHub Actions CI
 on: [pull_request, push]
 
 env:
-  VCPKG_COMMIT: c5ac711fefa6cacbd6bb6335349e36a765babf87
+  VCPKG_COMMIT: b361c2eefa3966cb7cec45275aff32e90430aaa6
   VCPKG_DEST_MACOS: /Users/runner/qbt_tools/vcpkg
   VCPKG_DEST_WIN: C:\qbt_tools\vcpkg
   LIBTORRENT_VERSION_TAG: v1.2.14
@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-20.04]
+        os: [ubuntu-latest]
         qbt_gui: ["GUI=ON", "GUI=OFF"]
       fail-fast: false
 
@@ -88,7 +88,7 @@ jobs:
   ci_windows:
     name: Windows + vcpkg
 
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     defaults:
       run:
@@ -125,10 +125,10 @@ jobs:
         $packages = `
           "boost-circular-buffer:x64-windows-static-release",
           "libtorrent:x64-windows-static-release",
-          "qt5-base:x64-windows-static-release",
-          "qt5-svg:x64-windows-static-release",
-          "qt5-tools:x64-windows-static-release",
-          "qt5-winextras:x64-windows-static-release"
+          "qt6-base:x64-windows-static-release",
+          "qt6-svg:x64-windows-static-release",
+          "qt6-tools:x64-windows-static-release",
+          "qt6-winextras:x64-windows-static-release"
         ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg.exe upgrade `
             --overlay-triplets=${{ github.workspace }}/triplets_overlay `
             --no-dry-run
@@ -174,7 +174,7 @@ jobs:
         qbt_gui: ["GUI=ON", "GUI=OFF"]
       fail-fast: false
 
-    runs-on: macos-10.15
+    runs-on: macos-latest
 
     defaults:
       run:
@@ -218,10 +218,10 @@ jobs:
         $packages = `
           "boost-circular-buffer:x64-osx-release",
           "libtorrent:x64-osx-release",
-          "qt5-base:x64-osx-release",
-          "qt5-svg:x64-osx-release",
-          "qt5-tools:x64-osx-release",
-          "qt5-macextras:x64-osx-release"
+          "qt6-base:x64-osx-release",
+          "qt6-svg:x64-osx-release",
+          "qt6-tools:x64-osx-release",
+          "qt6-macextras:x64-osx-release"
         ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg upgrade `
             --overlay-triplets=${{ github.workspace }}/triplets_overlay `
             --no-dry-run
