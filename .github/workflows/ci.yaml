@@ -125,10 +125,10 @@ jobs:
         $packages = `
           "boost-circular-buffer:x64-windows-static-release",
           "libtorrent:x64-windows-static-release",
-          "qt6-base:x64-windows-static-release",
-          "qt6-svg:x64-windows-static-release",
-          "qt6-tools:x64-windows-static-release",
-          "qt6-winextras:x64-windows-static-release"
+          "qtbase:x64-windows-static-release",
+          "qtsvg:x64-windows-static-release",
+          "qttools:x64-windows-static-release",
+          "qtwinextras:x64-windows-static-release"
         ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg.exe upgrade `
             --overlay-triplets=${{ github.workspace }}/triplets_overlay `
             --no-dry-run
@@ -218,10 +218,10 @@ jobs:
         $packages = `
           "boost-circular-buffer:x64-osx-release",
           "libtorrent:x64-osx-release",
-          "qt6-base:x64-osx-release",
-          "qt6-svg:x64-osx-release",
-          "qt6-tools:x64-osx-release",
-          "qt6-macextras:x64-osx-release"
+          "qt5-base:x64-osx-release",
+          "qt5-svg:x64-osx-release",
+          "qt5-tools:x64-osx-release",
+          "qt5-macextras:x64-osx-release"
         ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg upgrade `
             --overlay-triplets=${{ github.workspace }}/triplets_overlay `
             --no-dry-run
