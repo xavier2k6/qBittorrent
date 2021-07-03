@@ -219,8 +219,7 @@ jobs:
           "libtorrent:x64-osx-release",
           "qtbase:x64-osx-release",
           "qtsvg:x64-osx-release",
-          "qttools:x64-osx-release",
-          "qtmacextras:x64-osx-release"
+          "qttools:x64-osx-release"
         ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg upgrade `
             --overlay-triplets=${{ github.workspace }}/triplets_overlay `
             --no-dry-run
