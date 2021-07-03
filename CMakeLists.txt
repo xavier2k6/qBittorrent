@@ -11,7 +11,7 @@ project(qBittorrent
 # use CONFIG mode first in find_package
 set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON)
 # version requirements - older vesions may work, but you are on your own
-set(minBoostVersion 1.65)
+set(minBoostVersion 1.75)
 set(minQtVersion 6.1.1)
 set(minOpenSSLVersion 1.1.1)
 set(minLibtorrentVersion 1.2.14)
