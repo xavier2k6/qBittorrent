@@ -128,8 +128,7 @@ jobs:
           "qtbase:x64-windows-static-release",
           "qtsvg:x64-windows-static-release",
           "qttools:x64-windows-static-release",
-          "qtwinextras:x64-windows-static-release"
-        ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg.exe upgrade `
+          ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg.exe upgrade `
             --overlay-triplets=${{ github.workspace }}/triplets_overlay `
             --no-dry-run
         foreach($package in $packages)
@@ -218,10 +217,10 @@ jobs:
         $packages = `
           "boost-circular-buffer:x64-osx-release",
           "libtorrent:x64-osx-release",
-          "qt5-base:x64-osx-release",
-          "qt5-svg:x64-osx-release",
-          "qt5-tools:x64-osx-release",
-          "qt5-macextras:x64-osx-release"
+          "qtbase:x64-osx-release",
+          "qtsvg:x64-osx-release",
+          "qttools:x64-osx-release",
+          "qtmacextras:x64-osx-release"
         ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg upgrade `
             --overlay-triplets=${{ github.workspace }}/triplets_overlay `
             --no-dry-run
