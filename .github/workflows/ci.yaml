@@ -127,7 +127,7 @@ jobs:
           "libtorrent:x64-windows-static-release",
           "qtbase:x64-windows-static-release",
           "qtsvg:x64-windows-static-release",
-          "qttools:x64-windows-static-release",
+          "qttools:x64-windows-static-release"
           ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg.exe upgrade `
             --overlay-triplets=${{ github.workspace }}/triplets_overlay `
             --no-dry-run
