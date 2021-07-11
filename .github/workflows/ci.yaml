@@ -180,36 +180,36 @@ jobs:
 
     strategy:
       matrix:
+        os: [macos-10.15, macos-11]
         qbt_gui: ["GUI=ON", "GUI=OFF"]
       fail-fast: false
 
-runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
 
-strategy:
-      matrix:
-        os: [macos-10.15, macos-11.0]
-        defaults:
-          run:
+    defaults:
+      run:
         shell: pwsh
-        steps:
-        - name: checkout repository
-          uses: actions/checkout@v2
+
+    steps:
+    - name: checkout repository
+      uses: actions/checkout@v2
 
     # - ninja is needed for building qBittorrent (because it's preferable, not a hard requirement)
     # - automake is needed for the installation the vcpkg installation of fontconfig, a dependency of qt5-base
-        - name: install additional required packages with homebrew
+    - name: install additional required packages with homebrew
       shell: bash
       run: |
         brew install automake ninja
 
-        - name: setup vcpkg (cached, if possible)
+    - name: setup vcpkg (cached, if possible)
       uses: lukka/run-vcpkg@v7
       with:
         vcpkgDirectory: ${{ env.VCPKG_DEST_MACOS }}
         vcpkgGitCommitId: ${{ env.VCPKG_COMMIT }}
         setupOnly: true
-         - name: configure vcpkg triplet overlay for release builds only
-        run: |
+
+    - name: configure vcpkg triplet overlay for release builds only
+      run: |
         New-Item -Path ${{ github.workspace }} -Name "triplets_overlay" -ItemType Directory
         Copy-Item ${{ env.RUNVCPKG_VCPKG_ROOT }}/triplets/x64-osx.cmake `
           ${{ github.workspace }}/triplets_overlay/x64-osx-release.cmake
