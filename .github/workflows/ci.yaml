@@ -96,19 +96,20 @@ jobs:
 
   ci_macos:
     name: macOS + vcpkg
-
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        qbt_gui: ["GUI=ON", "GUI=OFF"]
-      fail-fast: false
+    os:
+      - macos-10.15
+      - macos-11
 
-    runs-on: [macos-latest, macos-11]
-
-    defaults:
+    qbt_gui: ["GUI=ON", "GUI=OFF"]
+fail-fast: false
+    
+defaults:
       run:
         shell: pwsh
-
-    steps:
+steps:
     - name: checkout repository
       uses: actions/checkout@v2
 
