@@ -7,7 +7,7 @@ name: GitHub Actions CI
 on: [pull_request, push]
 
 env:
-  VCPKG_COMMIT: b1b4808228377515acd849b8706ee2ad25ba455d
+  VCPKG_COMMIT: 04658e4cc48b4a52d1e41674198425395a5003c6
   VCPKG_DEST_MACOS: /Users/runner/qbt_tools/vcpkg
   VCPKG_DEST_WIN: C:\qbt_tools\vcpkg
   LIBTORRENT_VERSION_TAG: v1.2.14
@@ -171,10 +171,11 @@ jobs:
 
     strategy:
       matrix:
+        os: [macos-11, macos-10.15]
         qbt_gui: ["GUI=ON", "GUI=OFF"]
       fail-fast: false
 
-    runs-on: macos-11
+    runs-on: ${{ matrix.os }}
 
     defaults:
       run:
@@ -246,7 +247,7 @@ jobs:
     - name: upload artifact as zip
       uses: actions/upload-artifact@v2
       with:
-        name: qBittorrent-CI_macOS_${{ matrix.qbt_gui }}
+        name: qBittorrent-CI_${{ matrix.os }}_${{ matrix.qbt_gui }}
         path: |
           build/compile_commands.json
           build/target_graph.dot
