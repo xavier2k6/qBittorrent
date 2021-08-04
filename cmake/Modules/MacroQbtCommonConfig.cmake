@@ -81,6 +81,9 @@ macro(qbt_common_config)
             /utf-8
             # https://devblogs.microsoft.com/cppblog/msvc-now-correctly-reports-__cplusplus/
             /Zc:__cplusplus
+            /Qspectre
+            /Qspectre-load
+            /Qspectre-load-cf
         )
         target_link_options(qbt_common_cfg INTERFACE
             /guard:cf
