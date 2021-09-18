@@ -705,7 +705,7 @@ QColor getDefaultColorByState(const BitTorrent::TorrentState state)
     case BitTorrent::TorrentState::ForcedDownloading:
     case BitTorrent::TorrentState::DownloadingMetadata:
     case BitTorrent::TorrentState::ForcedDownloadingMetadata:
-        return {108, 194, 74}; // Apple
+        return {0, 102, 0}; // Green
     case BitTorrent::TorrentState::StalledDownloading:
         return {104, 104, 104}; // Dim Gray
     case BitTorrent::TorrentState::StalledUploading:
