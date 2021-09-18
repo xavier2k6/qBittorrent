@@ -707,9 +707,9 @@ QColor getDefaultColorByState(const BitTorrent::TorrentState state)
     case BitTorrent::TorrentState::ForcedDownloadingMetadata:
         return {108, 194, 74}; // Apple
     case BitTorrent::TorrentState::StalledDownloading:
-        return {102, 102, 102}; // Dim Gray
+        return {104, 104, 104}; // Dim Gray
     case BitTorrent::TorrentState::StalledUploading:
-        return {153, 153, 153}; // Nobel
+        return {144, 144, 144}; // Suva Grey
     case BitTorrent::TorrentState::Uploading:
     case BitTorrent::TorrentState::ForcedUploading:
         return {66, 133, 244}; // Royal Blue
@@ -724,7 +724,7 @@ QColor getDefaultColorByState(const BitTorrent::TorrentState state)
     case BitTorrent::TorrentState::CheckingUploading:
     case BitTorrent::TorrentState::CheckingResumeData:
     case BitTorrent::TorrentState::Moving:
-        return {0, 128, 128}; // Teal
+        return {0, 0, 153}; // New Midnight Blue
     case BitTorrent::TorrentState::Error:
     case BitTorrent::TorrentState::MissingFiles:
     case BitTorrent::TorrentState::Unknown:
