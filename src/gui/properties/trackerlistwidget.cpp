@@ -71,7 +71,6 @@ TrackerListWidget::TrackerListWidget(PropertiesWidget *properties)
     setItemsExpandable(false);
     setSelectionMode(QAbstractItemView::ExtendedSelection);
     header()->setStretchLastSection(false); // Must be set after loadSettings() in order to work
-    header()->setTextElideMode(Qt::ElideRight);
     // Ensure that at least one column is visible at all times
     if (visibleColumnsCount() == 0)
         setColumnHidden(COL_URL, false);
@@ -599,10 +598,10 @@ void TrackerListWidget::showTrackerListMenu(const QPoint &)
 
     if (!torrent->isPaused())
     {
-        menu->addAction(UIThemeManager::instance()->getIcon("view-refresh"), tr("Force reannounce to selected trackers")
+        menu->addAction(UIThemeManager::instance()->getIcon("reannounce"), tr("Force reannounce to selected trackers")
             , this, &TrackerListWidget::reannounceSelected);
         menu->addSeparator();
-        menu->addAction(UIThemeManager::instance()->getIcon("view-refresh"), tr("Force reannounce to all trackers")
+        menu->addAction(UIThemeManager::instance()->getIcon("reannounce"), tr("Force reannounce to all trackers")
             , this, [this]()
         {
             BitTorrent::Torrent *h = m_properties->getCurrentTorrent();

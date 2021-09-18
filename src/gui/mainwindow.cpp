@@ -191,6 +191,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ui->actionStartAll->setIcon(UIThemeManager::instance()->getIcon("media-playback-start"));
     m_ui->menuAutoShutdownOnDownloadsCompletion->setIcon(UIThemeManager::instance()->getIcon("application-exit"));
     m_ui->actionManageCookies->setIcon(UIThemeManager::instance()->getIcon("preferences-web-browser-cookies"));
+    m_ui->actionCheckForUpdates->setIcon(UIThemeManager::instance()->getIcon("view-refresh"));
 
     auto *lockMenu = new QMenu(this);
     lockMenu->addAction(tr("&Set Password"), this, &MainWindow::defineUILockPassword);

@@ -88,10 +88,7 @@ TorrentInfo::TorrentInfo(const TorrentInfo &other)
 
 TorrentInfo &TorrentInfo::operator=(const TorrentInfo &other)
 {
-    if (this != &other)
-    {
-        m_nativeInfo = other.m_nativeInfo;
-    }
+    m_nativeInfo = other.m_nativeInfo;
     return *this;
 }
 

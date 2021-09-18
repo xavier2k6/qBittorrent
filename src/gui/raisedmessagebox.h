@@ -32,8 +32,7 @@
 
 class RaisedMessageBox final : public QMessageBox
 {
-    Q_OBJECT
-    Q_DISABLE_COPY_MOVE(RaisedMessageBox)
+  Q_OBJECT
 
 public:
     static QMessageBox::StandardButton critical(QWidget *parent, const QString &title, const QString &text, QMessageBox::StandardButtons buttons = QMessageBox::Ok, QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
@@ -46,6 +45,9 @@ protected:
 
 private:
     RaisedMessageBox(QMessageBox::Icon icon, const QString &title, const QString &text, QMessageBox::StandardButtons buttons = NoButton, QWidget *parent = nullptr, Qt::WindowFlags f = Qt::Dialog|Qt::MSWindowsFixedSizeDialogHint);
+    RaisedMessageBox();
+    RaisedMessageBox(RaisedMessageBox const&);
+    void operator=(RaisedMessageBox const&);
 
     static QMessageBox::StandardButton impl(const QMessageBox::Icon &icon, QWidget *parent, const QString &title, const QString &text, QMessageBox::StandardButtons buttons = QMessageBox::Ok, QMessageBox::StandardButton defaultButton = QMessageBox::NoButton);
 };

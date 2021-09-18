@@ -551,9 +551,6 @@ void PropertiesWidget::loadDynamicData()
 
 void PropertiesWidget::loadUrlSeeds()
 {
-    if (!m_torrent)
-        return;
-
     m_ui->listWebSeeds->clear();
     qDebug("Loading URL seeds");
     const QVector<QUrl> hcSeeds = m_torrent->urlSeeds();
