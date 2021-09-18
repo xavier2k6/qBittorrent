@@ -724,7 +724,7 @@ QColor getDefaultColorByState(const BitTorrent::TorrentState state)
     case BitTorrent::TorrentState::CheckingUploading:
     case BitTorrent::TorrentState::CheckingResumeData:
     case BitTorrent::TorrentState::Moving:
-        return {51, 51, 153}; // Dark Slate Blue
+        return {81, 81, 142}; // Governor Bay
     case BitTorrent::TorrentState::Error:
     case BitTorrent::TorrentState::MissingFiles:
     case BitTorrent::TorrentState::Unknown:
