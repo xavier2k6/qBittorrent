@@ -24,7 +24,7 @@ jobs:
 
       - name: Install build tools
         run: |
-          choco install ninja
+          choco install ninja openssl
 
       # use the preinstalled vcpkg from image
       # https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md#package-management
@@ -50,7 +50,6 @@ jobs:
             -Value "set(VCPKG_BUILD_TYPE release)"
           # clear buildtrees after each package installation to reduce disk space requirements
           $packages = `
-            "openssl:x64-windows-static-release",
             "zlib:x64-windows-static-release"
           ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg.exe upgrade `
             --overlay-triplets="${{ github.workspace }}/triplets_overlay" `
