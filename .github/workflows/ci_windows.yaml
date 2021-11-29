@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["1.2.14"]
+        libt_version: ["RC_1_2"]
 
     env:
       boost_path: "${{ github.workspace }}/boost"
@@ -71,7 +71,8 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-          version: "6.2.0"
+          aqtversion: '==2.0.2'
+          version: "6.2.1"
 
       - name: Install libtorrent
         run: |
