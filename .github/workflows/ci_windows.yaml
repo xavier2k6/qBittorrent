@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["RC_1_2"]
+        libt_version: ["v2.0.4", "v1.2.14", "RC_2_0", "RC_1_2"]
 
     env:
       boost_path: "${{ github.workspace }}/boost"
