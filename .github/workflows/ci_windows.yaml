@@ -100,6 +100,7 @@ jobs:
 
       - name: Build qBittorrent
         run: |
+          lupdate -extensions c,cpp,h,hpp,ui .
           cmake `
             -B build `
             -G "Ninja" `
