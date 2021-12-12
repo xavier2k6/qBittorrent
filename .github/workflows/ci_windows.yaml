@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["v2.0.4", "v1.2.14", "RC_2_0", "RC_1_2"]
+        libt_version: ["v2.0.5", "v1.2.15", "RC_2_0", "RC_1_2"]
 
     env:
       boost_path: "${{ github.workspace }}/boost"
@@ -86,7 +86,7 @@ jobs:
           cmake `
             -B build `
             -G "Ninja" `
-            -DCMAKE_BUILD_TYPE=RelWithDebInfo `
+            -DCMAKE_BUILD_TYPE=Release `
             -DCMAKE_EXPORT_COMPILE_COMMANDS=ON `
             -DCMAKE_INSTALL_PREFIX="${{ env.libtorrent_path }}" `
             -DCMAKE_TOOLCHAIN_FILE="${{ env.RUNVCPKG_VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" `
