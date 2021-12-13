@@ -50,7 +50,7 @@ jobs:
             -Value "set(VCPKG_BUILD_TYPE release)"
           # clear buildtrees after each package installation to reduce disk space requirements
           $packages = `
-            "openssl:x64-windows-static-release"
+            "openssl:x64-windows-static-release",
             "zlib:x64-windows-static-release"
           ${{ env.RUNVCPKG_VCPKG_ROOT }}/vcpkg.exe upgrade `
             --overlay-triplets="${{ github.workspace }}/triplets_overlay" `
