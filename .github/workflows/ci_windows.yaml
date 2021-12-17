@@ -4,12 +4,16 @@ on: [pull_request, push]
 jobs:
   ci:
     name: Build
-    runs-on: [windows-2016, windows-2019, windows-2022]
+    runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
         libt_version: ["RC_2_0", "RC_1_2"]
+        os:
+        - windows-2016
+        - windows-2019
+        - windows-2022
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
