@@ -20,7 +20,7 @@ set(minLibtorrentVersion 2.0.4)
 set(minZlibVersion 1.2.11)
 
 if (MSVC)
-	set(CMAKE_SYSTEM_VERSION 7)
+	set(CMAKE_VS_WINDOWS_TARGET_PLATFORM_VERSION=10.0.19041.0)
 endif()
 
 # features (some are platform-specific)
