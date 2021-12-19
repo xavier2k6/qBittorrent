@@ -112,6 +112,7 @@ jobs:
             -G "Ninja" `
             -DCMAKE_BUILD_TYPE=RelWithDebInfo `
             -DCMAKE_EXPORT_COMPILE_COMMANDS=ON `
+            -DCMAKE_FIND_ROOT_PATH:PATH=${{ env.Qt5_DIR }} `
             -DCMAKE_TOOLCHAIN_FILE="${{ env.RUNVCPKG_VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" `
             -DBOOST_ROOT="${{ env.boost_path }}" `
             -DLibtorrentRasterbar_DIR="${{ env.libtorrent_path }}/lib/cmake/LibtorrentRasterbar" `
@@ -165,6 +166,7 @@ jobs:
             -DQT6=ON `
             -DCMAKE_BUILD_TYPE=RelWithDebInfo `
             -DCMAKE_EXPORT_COMPILE_COMMANDS=ON `
+            -DCMAKE_FIND_ROOT_PATH:PATH=${{ env.Qt6_DIR }} `
             -DCMAKE_TOOLCHAIN_FILE="${{ env.RUNVCPKG_VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" `
             -DBOOST_ROOT="${{ env.boost_path }}" `
             -DLibtorrentRasterbar_DIR="${{ env.libtorrent_path }}/lib/cmake/LibtorrentRasterbar" `
