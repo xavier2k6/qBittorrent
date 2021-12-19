@@ -4,15 +4,12 @@ on: [pull_request, push]
 jobs:
   ci:
     name: Build
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
 
     strategy:
       fail-fast: false
       matrix:
         libt_version: ["RC_2_0", "RC_1_2"]
-        os:
-        - windows-2019
-        - windows-2022
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
@@ -75,7 +72,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-          aqtversion: '==2.0.5'
+          aqtversion: '>=2.*.*'
           version: "6.2.2"
 
       - name: Install libtorrent
