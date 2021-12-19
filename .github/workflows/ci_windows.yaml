@@ -72,7 +72,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-          aqtversion: '>=2.*'
+          aqtversion: '>=2'
           version: "6.2.2"
 
       - name: Install libtorrent
