@@ -82,6 +82,7 @@ jobs:
         with:
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
           aqtversion: '>=2'
+          modules: 'Qt5compat'
 
       - name: Install libtorrent
         run: |
