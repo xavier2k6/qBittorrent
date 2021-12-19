@@ -70,10 +70,18 @@ jobs:
           7z x "${{ runner.temp }}/boost.7z" -o"${{ github.workspace }}/.."
           move "${{ github.workspace }}/../boost_*" "${{ env.boost_path }}"
 
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v1
+        with:
+            path: ../Qt
+            key: QtCache
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
-          aqtinstall: '>=2'
+          aqtversion: '>=2'
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
       - name: Install libtorrent
         run: |
