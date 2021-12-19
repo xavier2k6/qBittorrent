@@ -72,6 +72,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
+          aqtinstall: '>=2'
           version: "6.2.2"
 
       - name: Install libtorrent
@@ -118,30 +119,11 @@ jobs:
       - name: Prepare build artifacts
         run: |
           mkdir upload
+          D:/a/qBittorrent/qBittorrent/Qt/6.2.2/msvc2019_64/bin/windeployqt.exe qbittorrent.exe
           copy build/qbittorrent.exe upload
           copy build/qbittorrent.pdb upload
           copy dist/windows/qt.conf upload
-          # runtimes
-          copy "${{ env.Qt6_DIR }}/bin/Qt6Core.dll" upload
-          copy "${{ env.Qt6_DIR }}/bin/Qt6Gui.dll" upload
-          copy "${{ env.Qt6_DIR }}/bin/Qt6Network.dll" upload
-          copy "${{ env.Qt6_DIR }}/bin/Qt6Sql.dll" upload
-          copy "${{ env.Qt6_DIR }}/bin/Qt6Svg.dll" upload
-          copy "${{ env.Qt6_DIR }}/bin/Qt6Widgets.dll" upload
-          copy "${{ env.Qt6_DIR }}/bin/Qt6Xml.dll" upload
-          mkdir upload/plugins/iconengines
-          copy "${{ env.Qt6_DIR }}/plugins/iconengines/qsvgicon.dll" upload/plugins/iconengines
-          mkdir upload/plugins/imageformats
-          copy "${{ env.Qt6_DIR }}/plugins/imageformats/qico.dll" upload/plugins/imageformats
-          copy "${{ env.Qt6_DIR }}/plugins/imageformats/qsvg.dll" upload/plugins/imageformats
-          mkdir upload/plugins/platforms
-          copy "${{ env.Qt6_DIR }}/plugins/platforms/qwindows.dll" upload/plugins/platforms
-          mkdir upload/plugins/sqldrivers
-          copy "${{ env.Qt6_DIR }}/plugins/sqldrivers/qsqlite.dll" upload/plugins/sqldrivers
-          mkdir upload/plugins/styles
-          copy "${{ env.Qt6_DIR }}/plugins/styles/qwindowsvistastyle.dll" upload/plugins/styles
-          # cmake additionals
-          mkdir upload/cmake
+                    mkdir upload/cmake
           copy build/compile_commands.json upload/cmake
           copy build/target_graph.dot upload/cmake
           mkdir upload/cmake/libtorrent
