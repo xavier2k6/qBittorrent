@@ -20,11 +20,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup ccache
-        uses: Chocobo1/setup-ccache-action@v1
-        with:
-          update_packager_index: false
-
       - name: Setup devcmd
         uses: ilammy/msvc-dev-cmd@v1
 
@@ -105,6 +100,8 @@ jobs:
 
       - name: Build qBittorrent (Qt5)
         if: ${{ startsWith(matrix.qt_version, 5) }}
+        env:
+         CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
         run: |
           lupdate -extensions c,cpp,h,hpp,ui .
           cmake `
@@ -112,7 +109,6 @@ jobs:
             -G "Ninja" `
             -DCMAKE_BUILD_TYPE=RelWithDebInfo `
             -DCMAKE_EXPORT_COMPILE_COMMANDS=ON `
-            -DCMAKE_FIND_ROOT_PATH:PATH=${{ env.Qt5_DIR }} `
             -DCMAKE_TOOLCHAIN_FILE="${{ env.RUNVCPKG_VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" `
             -DBOOST_ROOT="${{ env.boost_path }}" `
             -DLibtorrentRasterbar_DIR="${{ env.libtorrent_path }}/lib/cmake/LibtorrentRasterbar" `
@@ -158,6 +154,8 @@ jobs:
 
       - name: Build qBittorrent (Qt6)
         if: ${{ startsWith(matrix.qt_version, 6) }}
+        env:
+         CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
         run: |
           lupdate -extensions c,cpp,h,hpp,ui .
           cmake `
@@ -166,7 +164,6 @@ jobs:
             -DQT6=ON `
             -DCMAKE_BUILD_TYPE=RelWithDebInfo `
             -DCMAKE_EXPORT_COMPILE_COMMANDS=ON `
-            -DCMAKE_FIND_ROOT_PATH:PATH=${{ env.Qt6_DIR }} `
             -DCMAKE_TOOLCHAIN_FILE="${{ env.RUNVCPKG_VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" `
             -DBOOST_ROOT="${{ env.boost_path }}" `
             -DLibtorrentRasterbar_DIR="${{ env.libtorrent_path }}/lib/cmake/LibtorrentRasterbar" `
