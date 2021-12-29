@@ -10,6 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         libt_version: ["RC_2_0", "RC_1_2"]
+        libt_commit: [e797d60a1f2c67ec0cb1e78babca6deed43ee000]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
