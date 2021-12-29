@@ -140,7 +140,7 @@ jobs:
           mkdir upload/plugins/sqldrivers
           copy "${{ env.Qt6_DIR }}/plugins/sqldrivers/qsqlite.dll" upload/plugins/sqldrivers
           mkdir upload/plugins/styles
-          copy "${{ env.Qt5_DIR }}/plugins/styles/qwindowsvistastyle.dll" upload/plugins/styles
+          copy "${{ env.Qt6_DIR }}/plugins/styles/qwindowsvistastyle.dll" upload/plugins/styles
           # cmake additionals
           mkdir upload/cmake
           copy build/compile_commands.json upload/cmake
