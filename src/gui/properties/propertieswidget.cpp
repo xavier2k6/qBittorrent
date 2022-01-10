@@ -439,7 +439,7 @@ void PropertiesWidget::loadDynamicData()
             if (m_torrent->isSeed())
                 elapsedString = tr("%1 (seeded for %2)", "e.g. 4m39s (seeded for 3m10s)")
                     .arg(Utils::Misc::userFriendlyDuration(m_torrent->activeTime())
-                        , Utils::Misc::userFriendlyDuration(m_torrent->seedingTime()));
+                        , Utils::Misc::userFriendlyDuration(m_torrent->finishedTime()));
             else
                 elapsedString = Utils::Misc::userFriendlyDuration(m_torrent->activeTime());
             m_ui->labelElapsedVal->setText(elapsedString);
@@ -581,11 +581,12 @@ void PropertiesWidget::loadUrlSeeds()
 
 QString PropertiesWidget::getFullPath(const QModelIndex &index) const
 {
+    const QDir saveDir {m_torrent->actualStorageLocation()};
+
     if (m_propListModel->itemType(index) == TorrentContentModelItem::FileType)
     {
         const int fileIdx = m_propListModel->getFileIndex(index);
         const QString filename {m_torrent->filePath(fileIdx)};
-        const QDir saveDir {m_torrent->savePath(true)};
         const QString fullPath {Utils::Fs::expandPath(saveDir.absoluteFilePath(filename))};
         return fullPath;
     }
@@ -596,7 +597,6 @@ QString PropertiesWidget::getFullPath(const QModelIndex &index) const
     for (QModelIndex modelIdx = m_propListModel->parent(nameIndex); modelIdx.isValid(); modelIdx = modelIdx.parent())
         folderPath.prepend(modelIdx.data().toString() + '/');
 
-    const QDir saveDir {m_torrent->savePath(true)};
     const QString fullPath {Utils::Fs::expandPath(saveDir.absoluteFilePath(folderPath))};
     return fullPath;
 }

@@ -59,7 +59,6 @@
 #include <QStorageInfo>
 #include <QRegularExpression>
 
-#include "base/bittorrent/common.h"
 #include "base/global.h"
 
 QString Utils::Fs::toNativePath(const QString &path)
@@ -72,15 +71,17 @@ QString Utils::Fs::toUniformPath(const QString &path)
     return QDir::fromNativeSeparators(path);
 }
 
-/**
- * Returns the file extension part of a file name.
- */
+QString Utils::Fs::resolvePath(const QString &relativePath, const QString &basePath)
+{
+    Q_ASSERT(QDir::isRelativePath(relativePath));
+    Q_ASSERT(QDir::isAbsolutePath(basePath));
+
+    return (relativePath.isEmpty() ? basePath : QDir(basePath).absoluteFilePath(relativePath));
+}
+
 QString Utils::Fs::fileExtension(const QString &filename)
 {
-    const QString name = filename.endsWith(QB_EXT)
-        ? filename.chopped(QB_EXT.length())
-        : filename;
-    return QMimeDatabase().suffixForFileName(name);
+    return QMimeDatabase().suffixForFileName(filename);
 }
 
 QString Utils::Fs::fileName(const QString &filePath)

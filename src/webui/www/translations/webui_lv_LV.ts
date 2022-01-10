@@ -144,10 +144,6 @@
         <translation>Neizdevās saglabāt programmas iestatījumus, qBittorrent droši vien nav sasniedzams.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC: #qbittorrent uz Freenode servera</translation>
-    </message>
-    <message>
         <source>Unknown</source>
         <translation>Nezināms</translation>
     </message>
@@ -182,10 +178,6 @@
     <message>
         <source>Login</source>
         <translation>Pierakstīties</translation>
-    </message>
-    <message>
-        <source>Original authors</source>
-        <translation type="vanished">Programmas radītāji</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -369,7 +361,7 @@
     </message>
     <message>
         <source>Original author</source>
-        <translation type="unfinished" />
+        <translation>Programmas radītājs</translation>
     </message>
 </context>
 <context>
@@ -1189,10 +1181,6 @@
         <translation>Izejošie porti (Min) [0: Atslēgts]:</translation>
     </message>
     <message>
-        <source>IP Address to report to trackers (requires restart):</source>
-        <translation type="vanished">IP adrese, kuru paziņot trakeriem (nepieciešams restarts):</translation>
-    </message>
-    <message>
         <source>Recheck torrents on completion:</source>
         <translation>Pārbaudīt torrentus pēc ielādes pabeigšanas:</translation>
     </message>
@@ -1478,15 +1466,15 @@
     </message>
     <message>
         <source>IP address reported to trackers (requires restart):</source>
-        <translation type="unfinished" />
+        <translation>IP adrese, kuru paziņot trakeriem (nepieciešams restarts):</translation>
     </message>
     <message>
         <source>Set to 0 to let your system pick an unused port</source>
-        <translation type="unfinished" />
+        <translation>Izvēlies 0, ja vēlies, lai sistēma izvēlas neizmantotu portu</translation>
     </message>
     <message>
         <source>Server-side request forgery (SSRF) mitigation:</source>
-        <translation type="unfinished" />
+        <translation>Servera puses pieprasījumu viltošanas (SSRF) aizsardzība:</translation>
     </message>
 </context>
 <context>
@@ -1560,12 +1548,12 @@
         <translation>Kopēt IP un portu</translation>
     </message>
     <message>
-        <source>Add a new peer...</source>
-        <translation>Pievienot jaunu koplietotāju...</translation>
-    </message>
-    <message>
         <source>Country/Region</source>
         <translation>Valsts/Apgabals</translation>
+    </message>
+    <message>
+        <source>Add peers...</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -1786,7 +1774,7 @@
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished" />
+        <translation>Progress:</translation>
     </message>
 </context>
 <context>
@@ -2756,10 +2744,6 @@
         <translation>Meklēt:</translation>
     </message>
     <message>
-        <source>Results (showing</source>
-        <translation type="vanished">Rezultāti (parādīti</translation>
-    </message>
-    <message>
         <source>Filter</source>
         <translation>Meklēt rezultātos</translation>
     </message>
@@ -2793,11 +2777,11 @@
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished" />
+        <translation>Rezultāti</translation>
     </message>
     <message>
         <source>showing</source>
-        <translation type="unfinished" />
+        <translation>parādīti</translation>
     </message>
 </context>
 <context>
@@ -3025,10 +3009,6 @@
         <translation>Nacionalitāte:</translation>
     </message>
     <message>
-        <source>Author</source>
-        <translation type="vanished">Autori</translation>
-    </message>
-    <message>
         <source>Software Used</source>
         <translation>Programmatūra</translation>
     </message>
@@ -3038,10 +3018,18 @@
     </message>
     <message>
         <source>Authors</source>
-        <translation type="unfinished" />
+        <translation>Autori</translation>
     </message>
     <message>
         <source>France</source>
+        <translation>Francija</translation>
+    </message>
+    <message>
+        <source>qBittorrent Mascot</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>qBittorrent icon</source>
         <translation type="unfinished" />
     </message>
 </context>

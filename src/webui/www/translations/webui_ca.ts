@@ -144,10 +144,6 @@
         <translation>No es poden desar les preferències del programa, probablement el qBittorrent no és accessible.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC: #qbittorrent a Freenode</translation>
-    </message>
-    <message>
         <source>Unknown</source>
         <translation>Desconegut</translation>
     </message>
@@ -182,10 +178,6 @@
     <message>
         <source>Login</source>
         <translation>Inicia sessió</translation>
-    </message>
-    <message>
-        <source>Original authors</source>
-        <translation type="vanished">Autors originals</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -370,7 +362,7 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     </message>
     <message>
         <source>Original author</source>
-        <translation type="unfinished" />
+        <translation>Autor original</translation>
     </message>
 </context>
 <context>
@@ -1190,10 +1182,6 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
         <translation>Ports de sortida (Min.) [0: desactivat]</translation>
     </message>
     <message>
-        <source>IP Address to report to trackers (requires restart):</source>
-        <translation type="vanished">Adreça IP per notificar als rastrejadors (requereix reinici):</translation>
-    </message>
-    <message>
         <source>Recheck torrents on completion:</source>
         <translation>Torna a comprovar els torrents completats:</translation>
     </message>
@@ -1479,15 +1467,15 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     </message>
     <message>
         <source>IP address reported to trackers (requires restart):</source>
-        <translation type="unfinished" />
+        <translation>Adreça IP informada als rastrejadors (requereix reinici):</translation>
     </message>
     <message>
         <source>Set to 0 to let your system pick an unused port</source>
-        <translation type="unfinished" />
+        <translation>Establiu-lo a 0 per deixar que el sistema triï un port no usat.</translation>
     </message>
     <message>
         <source>Server-side request forgery (SSRF) mitigation:</source>
-        <translation type="unfinished" />
+        <translation>Mitigació de la falsificació de sol·licituds del costat del servidor (SSRF):</translation>
     </message>
 </context>
 <context>
@@ -1561,12 +1549,12 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
         <translation>Copia IP:port</translation>
     </message>
     <message>
-        <source>Add a new peer...</source>
-        <translation>Afegeix un client nou...</translation>
-    </message>
-    <message>
         <source>Country/Region</source>
         <translation>País / regió</translation>
+    </message>
+    <message>
+        <source>Add peers...</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -1787,7 +1775,7 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished" />
+        <translation>Progrés:</translation>
     </message>
 </context>
 <context>
@@ -2757,10 +2745,6 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
         <translation>Cerca a:</translation>
     </message>
     <message>
-        <source>Results (showing</source>
-        <translation type="vanished">Resultats</translation>
-    </message>
-    <message>
         <source>Filter</source>
         <translation>Filtre</translation>
     </message>
@@ -2794,11 +2778,11 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished" />
+        <translation>Resultats</translation>
     </message>
     <message>
         <source>showing</source>
-        <translation type="unfinished" />
+        <translation>es mostra/en</translation>
     </message>
 </context>
 <context>
@@ -3026,10 +3010,6 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
         <translation>Nacionalitat:</translation>
     </message>
     <message>
-        <source>Author</source>
-        <translation type="vanished">Autor</translation>
-    </message>
-    <message>
         <source>Software Used</source>
         <translation>Programari usat</translation>
     </message>
@@ -3039,10 +3019,18 @@ Si us plau, no useu cap caràcter especial al nom de la categoria.</translation>
     </message>
     <message>
         <source>Authors</source>
-        <translation type="unfinished" />
+        <translation>Autors</translation>
     </message>
     <message>
         <source>France</source>
+        <translation>França</translation>
+    </message>
+    <message>
+        <source>qBittorrent Mascot</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>qBittorrent icon</source>
         <translation type="unfinished" />
     </message>
 </context>

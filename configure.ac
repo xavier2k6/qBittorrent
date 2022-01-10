@@ -1,5 +1,4 @@
-
-AC_INIT([qbittorrent], [v4.4.0alpha], [bugs.qbittorrent.org], [], [https://www.qbittorrent.org/])
+AC_INIT([qbittorrent], [v4.5.0alpha], [bugs.qbittorrent.org], [], [https://www.qbittorrent.org/])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4])
 : ${CFLAGS=""}
@@ -9,7 +8,7 @@ AC_PROG_CXX
 AC_PROG_SED
 AC_LANG(C++)
 AC_CANONICAL_HOST
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([foreign])
 
 # use compiler from env variables if available
 QBT_CC="$CC"

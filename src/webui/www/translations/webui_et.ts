@@ -144,10 +144,6 @@
         <translation>Ei saa salvestada programmis eelistusi, qBitorrent arvatavasti pole kättesaadav. </translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
         <source>Unknown</source>
         <translation>Tundmatu</translation>
     </message>
@@ -161,7 +157,7 @@
     </message>
     <message>
         <source>The port used for the Web UI must be between 1 and 65535.</source>
-        <translation>Port peab Web UI kasutuseks olema vahemikus 1 kuni 65535.</translation>
+        <translation>Port Web UI jaoks peab olema vahemikus 1 kuni 65535.</translation>
     </message>
     <message>
         <source>Unable to log in, qBittorrent is probably unreachable.</source>
@@ -182,10 +178,6 @@
     <message>
         <source>Login</source>
         <translation>Logi sisse</translation>
-    </message>
-    <message>
-        <source>Original authors</source>
-        <translation type="vanished">Algselt autorid</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -365,11 +357,11 @@
     </message>
     <message>
         <source>The port used for incoming connections must be between 0 and 65535.</source>
-        <translation type="unfinished" />
+        <translation>Port sissetulevate ühenduste jaoks peab olema vahemikus 0 ja 65535.</translation>
     </message>
     <message>
         <source>Original author</source>
-        <translation type="unfinished" />
+        <translation>Algne autor</translation>
     </message>
 </context>
 <context>
@@ -982,7 +974,7 @@
     </message>
     <message>
         <source>Enable clickjacking protection</source>
-        <translation type="unfinished" />
+        <translation>Luba clickjacking'ute kaitse</translation>
     </message>
     <message>
         <source>Enable Cross-Site Request Forgery (CSRF) protection</source>
@@ -1106,7 +1098,7 @@
     </message>
     <message>
         <source>%G: Tags (separated by comma)</source>
-        <translation type="unfinished" />
+        <translation>%G: Sildid (eraldatud komaga)</translation>
     </message>
     <message>
         <source>Socket backlog size:</source>
@@ -1150,7 +1142,7 @@
     </message>
     <message>
         <source>Any interface</source>
-        <translation type="unfinished" />
+        <translation>Iga kasutajaliides</translation>
     </message>
     <message>
         <source>Always announce to all tiers:</source>
@@ -1234,7 +1226,7 @@
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished" />
+        <translation>Edasijõudnutele</translation>
     </message>
     <message>
         <source>min</source>
@@ -1246,7 +1238,7 @@
     </message>
     <message>
         <source>Seeding Limits</source>
-        <translation type="unfinished" />
+        <translation>Jagamise Limiidid</translation>
     </message>
     <message>
         <source>KiB</source>
@@ -1462,7 +1454,7 @@
     </message>
     <message>
         <source>Enable reverse proxy support</source>
-        <translation type="unfinished" />
+        <translation>Luba reverse proxy tugi</translation>
     </message>
     <message>
         <source>%J: Info hash v2</source>
@@ -1478,7 +1470,7 @@
     </message>
     <message>
         <source>Set to 0 to let your system pick an unused port</source>
-        <translation type="unfinished" />
+        <translation>Vali 0, et süsteem saaks valida vaba pordi</translation>
     </message>
     <message>
         <source>Server-side request forgery (SSRF) mitigation:</source>
@@ -1556,12 +1548,12 @@
         <translation>Kopeeri IP:port</translation>
     </message>
     <message>
-        <source>Add a new peer...</source>
-        <translation>Lisa uus partner...</translation>
-    </message>
-    <message>
         <source>Country/Region</source>
         <translation>Riik/Regioon</translation>
+    </message>
+    <message>
+        <source>Add peers...</source>
+        <translation>Lisa partnereid...</translation>
     </message>
 </context>
 <context>
@@ -1871,7 +1863,7 @@
     </message>
     <message>
         <source>Queued I/O jobs:</source>
-        <translation type="unfinished" />
+        <translation>Ootel I/O toimingud:</translation>
     </message>
     <message>
         <source>Write cache overload:</source>
@@ -1942,7 +1934,7 @@
     </message>
     <message>
         <source>Seeding (%1)</source>
-        <translation type="unfinished" />
+        <translation>Jagamisel (%1)</translation>
     </message>
     <message>
         <source>Completed (%1)</source>
@@ -1994,11 +1986,11 @@
     </message>
     <message>
         <source>Checking (%1)</source>
-        <translation type="unfinished" />
+        <translation>Kontrollitakse (%1)</translation>
     </message>
     <message>
         <source>Checking (0)</source>
-        <translation type="unfinished" />
+        <translation>Kontrollimisel (0)</translation>
     </message>
 </context>
 <context>
@@ -2062,7 +2054,7 @@
     </message>
     <message>
         <source>Tags</source>
-        <translation type="unfinished" />
+        <translation>Sildid</translation>
     </message>
     <message>
         <source>Added On</source>
@@ -2264,7 +2256,7 @@
     <name>TrackersAdditionDialog</name>
     <message>
         <source>Trackers addition dialog</source>
-        <translation type="unfinished" />
+        <translation>Jälitajate lisa dialoog</translation>
     </message>
     <message>
         <source>List of trackers to add (one per line):</source>
@@ -2359,7 +2351,7 @@
     </message>
     <message>
         <source>Tags</source>
-        <translation type="unfinished" />
+        <translation>Sildid</translation>
     </message>
     <message>
         <source>Trackers</source>
@@ -2508,15 +2500,15 @@
     </message>
     <message>
         <source>Comma-separated tags:</source>
-        <translation type="unfinished" />
+        <translation>Komaga eraldatud sildid:</translation>
     </message>
     <message>
         <source>Add Tags</source>
-        <translation type="unfinished" />
+        <translation>Lisa silte</translation>
     </message>
     <message>
         <source>Tags</source>
-        <translation type="unfinished" />
+        <translation>Sildid</translation>
     </message>
     <message>
         <source>Magnet link</source>
@@ -2710,7 +2702,7 @@
     </message>
     <message>
         <source>Install plugin</source>
-        <translation type="unfinished" />
+        <translation>Installi plugin</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -2752,10 +2744,6 @@
         <translation>Otsi asukohast:</translation>
     </message>
     <message>
-        <source>Results (showing</source>
-        <translation type="vanished">Tulemused (kuvatakse</translation>
-    </message>
-    <message>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
@@ -2765,7 +2753,7 @@
     </message>
     <message>
         <source>Only enabled</source>
-        <translation type="unfinished" />
+        <translation>Ainult lubatud</translation>
     </message>
     <message>
         <source>out of</source>
@@ -2789,11 +2777,11 @@
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished" />
+        <translation>Tulemusi</translation>
     </message>
     <message>
         <source>showing</source>
-        <translation type="unfinished" />
+        <translation>kuvatakse</translation>
     </message>
 </context>
 <context>
@@ -2804,11 +2792,11 @@
     </message>
     <message>
         <source>Install new plugin</source>
-        <translation type="unfinished" />
+        <translation>Installi uus plugin</translation>
     </message>
     <message>
         <source>You can get new search engine plugins here:</source>
-        <translation type="unfinished" />
+        <translation>Siit saate uusi plugin'aid otsingu mootorile:</translation>
     </message>
     <message>
         <source>Close</source>
@@ -2820,7 +2808,7 @@
     </message>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished" />
+        <translation>Lubatud</translation>
     </message>
     <message>
         <source>Warning: Be sure to comply with your country's copyright laws when downloading torrents from any of these search engines.</source>
@@ -2851,7 +2839,7 @@
     </message>
     <message>
         <source>Search engine</source>
-        <translation type="unfinished" />
+        <translation>Otsingu mootor</translation>
     </message>
     <message>
         <source>Seeders</source>
@@ -2870,7 +2858,7 @@
     </message>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished" />
+        <translation>Lubatud</translation>
     </message>
     <message>
         <source>Version</source>
@@ -2912,11 +2900,11 @@
     <name>TagFilterWidget</name>
     <message>
         <source>New Tag</source>
-        <translation type="unfinished" />
+        <translation>Uus Silt</translation>
     </message>
     <message>
         <source>Add tag...</source>
-        <translation type="unfinished" />
+        <translation>Lisa silt...</translation>
     </message>
     <message>
         <source>Delete torrents</source>
@@ -2924,7 +2912,7 @@
     </message>
     <message>
         <source>Tag:</source>
-        <translation type="unfinished" />
+        <translation>Silt:</translation>
     </message>
     <message>
         <source>Pause torrents</source>
@@ -2936,15 +2924,15 @@
     </message>
     <message>
         <source>Remove unused tags</source>
-        <translation type="unfinished" />
+        <translation>Eemalda kasutamata sildid</translation>
     </message>
     <message>
         <source>Invalid tag name</source>
-        <translation type="unfinished" />
+        <translation>Sobimatu sildi nimi</translation>
     </message>
     <message>
         <source>Remove tag</source>
-        <translation type="unfinished" />
+        <translation>Eemalda silt</translation>
     </message>
 </context>
 <context>
@@ -2955,14 +2943,14 @@
     </message>
     <message>
         <source>Untagged</source>
-        <translation type="unfinished" />
+        <translation>Sildistamata</translation>
     </message>
 </context>
 <context>
     <name>AboutDialog</name>
     <message>
         <source>Bug Tracker:</source>
-        <translation type="unfinished" />
+        <translation>Vigade jälgija:</translation>
     </message>
     <message>
         <source>About</source>
@@ -3021,10 +3009,6 @@
         <translation>Rahvus:</translation>
     </message>
     <message>
-        <source>Author</source>
-        <translation type="vanished">Autor</translation>
-    </message>
-    <message>
         <source>Software Used</source>
         <translation>Kasutatud tarkvara</translation>
     </message>
@@ -3034,11 +3018,19 @@
     </message>
     <message>
         <source>Authors</source>
-        <translation type="unfinished" />
+        <translation>Autorid</translation>
     </message>
     <message>
         <source>France</source>
-        <translation type="unfinished" />
+        <translation>Prantsuse</translation>
+    </message>
+    <message>
+        <source>qBittorrent Mascot</source>
+        <translation>qBitorrenti maskott</translation>
+    </message>
+    <message>
+        <source>qBittorrent icon</source>
+        <translation>qBitorrenti ikoon</translation>
     </message>
 </context>
 <context>
@@ -3213,7 +3205,7 @@
     </message>
     <message>
         <source>Episode filter rules: </source>
-        <translation type="unfinished" />
+        <translation>Episoodide filtrite reeglid:</translation>
     </message>
     <message>
         <source>Auto downloading of RSS torrents is disabled now! You can enable it in application settings.</source>
@@ -3261,7 +3253,7 @@
     </message>
     <message>
         <source>Clear downloaded episodes</source>
-        <translation type="unfinished" />
+        <translation>Puhasta allalaaditud episoodid</translation>
     </message>
     <message>
         <source>Whitespaces count as AND operators (all words, any order)</source>
@@ -3281,7 +3273,7 @@
     </message>
     <message>
         <source>Are you sure you want to clear the list of downloaded episodes for the selected rule?</source>
-        <translation type="unfinished" />
+        <translation>Kindel, et soovite eemaldada valitud reeglis allalaaditud episoodide nimekirja?</translation>
     </message>
     <message>
         <source>Must Contain:</source>
@@ -3305,7 +3297,7 @@
     </message>
     <message>
         <source>Three range types for episodes are supported: </source>
-        <translation type="unfinished" />
+        <translation>Kolm toetatud vahemiku tüüpi episoodidele:</translation>
     </message>
     <message>
         <source>Are you sure you want to remove the selected download rules?</source>
@@ -3349,7 +3341,7 @@
     </message>
     <message>
         <source>Episode Filter:</source>
-        <translation type="unfinished" />
+        <translation>Episoodi Filter:</translation>
     </message>
     <message>
         <source>Rss Downloader</source>

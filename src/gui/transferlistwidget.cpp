@@ -43,7 +43,6 @@
 #include <QVector>
 #include <QWheelEvent>
 
-#include "base/bittorrent/common.h"
 #include "base/bittorrent/session.h"
 #include "base/bittorrent/torrent.h"
 #include "base/bittorrent/trackerentry.h"
@@ -93,9 +92,7 @@ namespace
 
         for (const QString &filePath : asConst(torrent->filePaths()))
         {
-            QString fileName = Utils::Fs::fileName(filePath);
-            if (fileName.endsWith(QB_EXT))
-                fileName.chop(QB_EXT.length());
+            const QString fileName = Utils::Fs::fileName(filePath);
             if (Utils::Misc::isPreviewable(fileName))
                 return true;
         }
@@ -106,12 +103,12 @@ namespace
     void openDestinationFolder(const BitTorrent::Torrent *const torrent)
     {
 #ifdef Q_OS_MACOS
-        MacUtils::openFiles({torrent->contentPath(true)});
+        MacUtils::openFiles({torrent->contentPath()});
 #else
         if (torrent->filesCount() == 1)
-            Utils::Gui::openFolderSelect(torrent->contentPath(true));
+            Utils::Gui::openFolderSelect(torrent->contentPath());
         else
-            Utils::Gui::openPath(torrent->contentPath(true));
+            Utils::Gui::openPath(torrent->contentPath());
 #endif
     }
 
@@ -525,22 +522,22 @@ void TransferListWidget::openSelectedTorrentsFolder() const
     // folders prehilighted for opening, so we use a custom method.
     for (BitTorrent::Torrent *const torrent : asConst(getSelectedTorrents()))
     {
-        QString path = torrent->contentPath(true);
-        pathsList.insert(path);
+        const QString contentPath = QDir(torrent->actualStorageLocation()).absoluteFilePath(torrent->contentPath());
+        pathsList.insert(contentPath);
     }
     MacUtils::openFiles(pathsList);
 #else
     for (BitTorrent::Torrent *const torrent : asConst(getSelectedTorrents()))
     {
-        QString path = torrent->contentPath(true);
-        if (!pathsList.contains(path))
+        const QString contentPath = torrent->contentPath();
+        if (!pathsList.contains(contentPath))
         {
             if (torrent->filesCount() == 1)
-                Utils::Gui::openFolderSelect(path);
+                Utils::Gui::openFolderSelect(contentPath);
             else
-                Utils::Gui::openPath(path);
+                Utils::Gui::openPath(contentPath);
         }
-        pathsList.insert(path);
+        pathsList.insert(contentPath);
     }
 #endif // Q_OS_MACOS
 }

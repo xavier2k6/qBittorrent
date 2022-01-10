@@ -144,10 +144,6 @@
         <translation>Nem sikerült menteni a beállításokat. A qBittorrent valószínüleg nem elérhető.</translation>
     </message>
     <message>
-        <source>IRC: #qbittorrent on Freenode</source>
-        <translation>IRC: #qbittorrent a Freenode-on</translation>
-    </message>
-    <message>
         <source>Unknown</source>
         <translation>Ismeretlen</translation>
     </message>
@@ -182,10 +178,6 @@
     <message>
         <source>Login</source>
         <translation>Bejelentkezés</translation>
-    </message>
-    <message>
-        <source>Original authors</source>
-        <translation type="vanished">Eredeti szerzők - fejlesztők</translation>
     </message>
     <message>
         <source>Apply</source>
@@ -369,7 +361,7 @@
     </message>
     <message>
         <source>Original author</source>
-        <translation type="unfinished" />
+        <translation>Eredeti szerző</translation>
     </message>
 </context>
 <context>
@@ -1189,10 +1181,6 @@
         <translation>Kimenő portok (Min) [0: Letiltva]:</translation>
     </message>
     <message>
-        <source>IP Address to report to trackers (requires restart):</source>
-        <translation type="vanished">Trackernek lejelentett IP cím (újraindítást igényel):</translation>
-    </message>
-    <message>
         <source>Recheck torrents on completion:</source>
         <translation>Torrentek újraellenőrzése a letöltésük végeztével:</translation>
     </message>
@@ -1478,15 +1466,15 @@
     </message>
     <message>
         <source>IP address reported to trackers (requires restart):</source>
-        <translation type="unfinished" />
+        <translation>A trackerek felé jelentett IP-cím (újraindítást igényel):</translation>
     </message>
     <message>
         <source>Set to 0 to let your system pick an unused port</source>
-        <translation type="unfinished" />
+        <translation>Állítsa 0-ra, hogy a rendszer válasszon egy nem használt portot</translation>
     </message>
     <message>
         <source>Server-side request forgery (SSRF) mitigation:</source>
-        <translation type="unfinished" />
+        <translation>Védekezés a kiszolgálóoldali kéréshamisítás (SSRF) ellen:</translation>
     </message>
 </context>
 <context>
@@ -1560,12 +1548,12 @@
         <translation>IP:port másolása</translation>
     </message>
     <message>
-        <source>Add a new peer...</source>
-        <translation>Új ügyfél hozzáadása...</translation>
-    </message>
-    <message>
         <source>Country/Region</source>
         <translation>Ország/régió</translation>
+    </message>
+    <message>
+        <source>Add peers...</source>
+        <translation type="unfinished" />
     </message>
 </context>
 <context>
@@ -1786,7 +1774,7 @@
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished" />
+        <translation>Folyamat:</translation>
     </message>
 </context>
 <context>
@@ -2756,10 +2744,6 @@
         <translation>Keresés itt:</translation>
     </message>
     <message>
-        <source>Results (showing</source>
-        <translation type="vanished">Találatok:</translation>
-    </message>
-    <message>
         <source>Filter</source>
         <translation>Szűrő</translation>
     </message>
@@ -2793,11 +2777,11 @@
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished" />
+        <translation>Találatok</translation>
     </message>
     <message>
         <source>showing</source>
-        <translation type="unfinished" />
+        <translation>megjelenítése</translation>
     </message>
 </context>
 <context>
@@ -3025,10 +3009,6 @@
         <translation>Nemzetiség:</translation>
     </message>
     <message>
-        <source>Author</source>
-        <translation type="vanished">Szerző</translation>
-    </message>
-    <message>
         <source>Software Used</source>
         <translation>Használatban lévő szoftver</translation>
     </message>
@@ -3038,10 +3018,18 @@
     </message>
     <message>
         <source>Authors</source>
-        <translation type="unfinished" />
+        <translation>Szerzők</translation>
     </message>
     <message>
         <source>France</source>
+        <translation>Franciaország</translation>
+    </message>
+    <message>
+        <source>qBittorrent Mascot</source>
+        <translation type="unfinished" />
+    </message>
+    <message>
+        <source>qBittorrent icon</source>
         <translation type="unfinished" />
     </message>
 </context>

@@ -74,10 +74,10 @@ namespace
         const QString configPath {specialFolderLocation(SpecialFolder::Config)};
         migrate(QLatin1String("Preferences/WebUI/HTTPS/Certificate")
             , QLatin1String("Preferences/WebUI/HTTPS/CertificatePath")
-            , Utils::Fs::toNativePath(configPath + QLatin1String("WebUICertificate.crt")));
+            , Utils::Fs::toNativePath(configPath + QLatin1String("/WebUICertificate.crt")));
         migrate(QLatin1String("Preferences/WebUI/HTTPS/Key")
             , QLatin1String("Preferences/WebUI/HTTPS/KeyPath")
-            , Utils::Fs::toNativePath(configPath + QLatin1String("WebUIPrivateKey.pem")));
+            , Utils::Fs::toNativePath(configPath + QLatin1String("/WebUIPrivateKey.pem")));
     }
 
     void upgradeTorrentContentLayout()
@@ -233,8 +233,8 @@ namespace
     {
         struct KeyMapping
         {
-            QString oldKey;
             QString newKey;
+            QString oldKey;
         };
 
         const KeyMapping mappings[] =
@@ -322,7 +322,7 @@ namespace
             {
                 const auto value = settingsStorage->loadValue<QVariant>(mapping.oldKey);
                 settingsStorage->storeValue(mapping.newKey, value);
-                settingsStorage->removeValue(mapping.oldKey);
+                // TODO: Remove oldKey after ~v4.4.3 and bump migration version
             }
         }
     }
