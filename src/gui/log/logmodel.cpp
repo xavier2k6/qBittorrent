@@ -32,6 +32,7 @@
 #include <QApplication>
 #include <QDateTime>
 #include <QColor>
+#include <QColorConstants>
 #include <QPalette>
 
 #include "base/global.h"
@@ -143,8 +144,8 @@ LogMessageModel::LogMessageModel(QObject *parent)
     , m_foregroundForMessageTypes
     {
         {Log::NORMAL, UIThemeManager::instance()->getColor(QLatin1String("Log.Normal"), Qt::darkGreen)},
-        {Log::INFO, UIThemeManager::instance()->getColor(QLatin1String("Log.Info"), Qt::cyan)},
-        {Log::WARNING, UIThemeManager::instance()->getColor(QLatin1String("Log.Warning"), Qt::darkYellow)},
+        {Log::INFO, UIThemeManager::instance()->getColor(QLatin1String("Log.Info"), Qt::deepskyblue)},
+        {Log::WARNING, UIThemeManager::instance()->getColor(QLatin1String("Log.Warning"), Qt::orange)},
         {Log::CRITICAL, UIThemeManager::instance()->getColor(QLatin1String("Log.Critical"), Qt::red)}
     }
 {
