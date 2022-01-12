@@ -343,7 +343,7 @@ Session::Session(QObject *parent)
     , m_outgoingPortsMin(BITTORRENT_SESSION_KEY("OutgoingPortsMin"), 0)
     , m_outgoingPortsMax(BITTORRENT_SESSION_KEY("OutgoingPortsMax"), 0)
     , m_UPnPLeaseDuration(BITTORRENT_SESSION_KEY("UPnPLeaseDuration"), 0)
-    , m_peerToS(BITTORRENT_SESSION_KEY("PeerToS"), 0x20)
+    , m_peerToS(BITTORRENT_SESSION_KEY("PeerToS"), 0x04)
     , m_ignoreLimitsOnLAN(BITTORRENT_SESSION_KEY("IgnoreLimitsOnLAN"), false)
     , m_includeOverheadInLimits(BITTORRENT_SESSION_KEY("IncludeOverheadInLimits"), false)
     , m_announceIP(BITTORRENT_SESSION_KEY("AnnounceIP"))
@@ -2148,24 +2148,24 @@ bool Session::addTorrent_impl(const std::variant<MagnetUri, TorrentInfo> &source
     {
         const TorrentInfo &torrentInfo = std::get<TorrentInfo>(source);
 
-        // if torrent name wasn't explicitly set we handle the case of
-        // initial renaming of torrent content and rename torrent accordingly
-        if (loadTorrentParams.name.isEmpty())
-        {
-            QString contentName = torrentInfo.rootFolder();
-            if (contentName.isEmpty() && (torrentInfo.filesCount() == 1))
-                contentName = Utils::Fs::fileName(torrentInfo.filePath(0));
-
-            if (!contentName.isEmpty() && (contentName != torrentInfo.name()))
-                loadTorrentParams.name = contentName;
-        }
-
         Q_ASSERT(addTorrentParams.filePaths.isEmpty() || (addTorrentParams.filePaths.size() == torrentInfo.filesCount()));
 
         const TorrentContentLayout contentLayout = ((loadTorrentParams.contentLayout == TorrentContentLayout::Original)
                                                     ? detectContentLayout(torrentInfo.filePaths()) : loadTorrentParams.contentLayout);
         QStringList filePaths = (!addTorrentParams.filePaths.isEmpty() ? addTorrentParams.filePaths : torrentInfo.filePaths());
         applyContentLayout(filePaths, contentLayout, Utils::Fs::findRootFolder(torrentInfo.filePaths()));
+
+        // if torrent name wasn't explicitly set we handle the case of
+        // initial renaming of torrent content and rename torrent accordingly
+        if (loadTorrentParams.name.isEmpty())
+        {
+            QString contentName = Utils::Fs::findRootFolder(filePaths);
+            if (contentName.isEmpty() && (filePaths.size() == 1))
+                contentName = Utils::Fs::fileName(filePaths.at(0));
+
+            if (!contentName.isEmpty() && (contentName != torrentInfo.name()))
+                loadTorrentParams.name = contentName;
+        }
 
         if (!loadTorrentParams.hasSeedStatus)
         {
