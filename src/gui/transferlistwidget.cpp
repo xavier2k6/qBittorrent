@@ -337,9 +337,11 @@ void TransferListWidget::setSelectedTorrentsLocation()
     const QString oldLocation = torrents[0]->savePath();
 
     auto fileDialog = new QFileDialog(this, tr("Choose save path"), oldLocation);
+    fileDialog->setAttribute(Qt::WA_DeleteOnClose);
     fileDialog->setFileMode(QFileDialog::Directory);
+    fileDialog->setModal(true);
     fileDialog->setOptions(QFileDialog::DontConfirmOverwrite | QFileDialog::ShowDirsOnly | QFileDialog::HideNameFilterDetails);
-    connect(fileDialog, &QFileDialog::accepted, this, [this, fileDialog]()
+    connect(fileDialog, &QDialog::accepted, this, [this, fileDialog]()
     {
         const QVector<BitTorrent::Torrent *> torrents = getSelectedTorrents();
         if (torrents.isEmpty())
@@ -357,8 +359,6 @@ void TransferListWidget::setSelectedTorrentsLocation()
         }
     });
 
-    fileDialog->setModal(true);
-    fileDialog->setAttribute(Qt::WA_DeleteOnClose);
     fileDialog->show();
 }
 
