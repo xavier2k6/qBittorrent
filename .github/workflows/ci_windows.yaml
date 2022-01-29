@@ -30,11 +30,11 @@ jobs:
       # use the preinstalled vcpkg from image
       # https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md#package-management
       - name: Setup vcpkg
-        uses: lukka/run-vcpkg@v10
+        uses: lukka/run-vcpkg@v7
         with:
           vcpkgDirectory: C:/vcpkg
           doNotUpdateVcpkg: true  # the preinstalled vcpkg is updated regularly
-          runVcpkgInstall: true
+          setupOnly: true
 
       - name: Install dependencies from vcpkg
         run: |
