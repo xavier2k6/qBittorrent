@@ -10,6 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         libt_version: ["RC_2_0", "RC_1_2"]
+        Qt_version: ["6.2.3"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
@@ -72,8 +73,9 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
+          py7zrversion: '>=0.17'
           aqtversion: '>=2'
-          version: "6.2.3"
+          version: ${{ matrix.Qt_version }}
 
       - name: Install libtorrent
         run: |
@@ -152,5 +154,5 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: qBittorrent-CI_Windows-x64_libtorrent-${{ matrix.libt_version }}-Qt_6.2.2
+          name: qBittorrent-CI_Windows-x64_libtorrent-${{ matrix.libt_version }}_Qt-${{ matrix.Qt_version }}
           path: upload
