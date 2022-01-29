@@ -44,7 +44,6 @@
 #include <libtorrent/info_hash.hpp>
 #endif
 
-#include <QBitArray>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -59,6 +58,7 @@
 #include "common.h"
 #include "downloadpriority.h"
 #include "loadtorrentparams.h"
+#include "ltqbitarray.h"
 #include "ltqhash.h"
 #include "lttypecast.h"
 #include "peeraddress.h"
@@ -1250,13 +1250,9 @@ QVector<PeerInfo> TorrentImpl::peers() const
 
 QBitArray TorrentImpl::pieces() const
 {
-    QBitArray result(m_nativeStatus.pieces.size());
-    for (int i = 0; i < result.size(); ++i)
-    {
-        if (m_nativeStatus.pieces[lt::piece_index_t {i}])
-            result.setBit(i, true);
-    }
-    return result;
+    if (m_pieces.isEmpty())
+        m_pieces = LT::toQBitArray(m_nativeStatus.pieces);
+    return m_pieces;
 }
 
 QBitArray TorrentImpl::downloadingPieces() const
@@ -2094,6 +2090,7 @@ void TorrentImpl::updateStatus()
 
 void TorrentImpl::updateStatus(const lt::torrent_status &nativeStatus)
 {
+    m_pieces.clear();
     m_nativeStatus = nativeStatus;
     updateState();
 

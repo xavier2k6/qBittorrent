@@ -30,6 +30,7 @@
 
 #include <QBitArray>
 
+#include "base/bittorrent/ltqbitarray.h"
 #include "base/bittorrent/torrent.h"
 #include "base/net/geoipmanager.h"
 #include "base/unicodestrings.h"
@@ -39,8 +40,8 @@ using namespace BitTorrent;
 
 PeerInfo::PeerInfo(const Torrent *torrent, const lt::peer_info &nativeInfo)
     : m_nativeInfo(nativeInfo)
+    , m_relevance(calcRelevance(torrent))
 {
-    calcRelevance(torrent);
     determineFlags();
 }
 
@@ -207,13 +208,7 @@ qlonglong PeerInfo::totalDownload() const
 
 QBitArray PeerInfo::pieces() const
 {
-    QBitArray result(m_nativeInfo.pieces.size());
-    for (int i = 0; i < result.size(); ++i)
-    {
-        if (m_nativeInfo.pieces[lt::piece_index_t {i}])
-            result.setBit(i, true);
-    }
-    return result;
+    return LT::toQBitArray(m_nativeInfo.pieces);
 }
 
 QString PeerInfo::connectionType() const
@@ -226,28 +221,16 @@ QString PeerInfo::connectionType() const
         : QLatin1String {"Web"};
 }
 
-void PeerInfo::calcRelevance(const Torrent *torrent)
+qreal PeerInfo::calcRelevance(const Torrent *torrent) const
 {
     const QBitArray allPieces = torrent->pieces();
+    const int localMissing = allPieces.count(false);
+    if (localMissing <= 0)
+        return 0;
+
     const QBitArray peerPieces = pieces();
-
-    int localMissing = 0;
-    int remoteHaves = 0;
-
-    for (int i = 0; i < allPieces.size(); ++i)
-    {
-        if (!allPieces[i])
-        {
-            ++localMissing;
-            if (peerPieces[i])
-                ++remoteHaves;
-        }
-    }
-
-    if (localMissing == 0)
-        m_relevance = 0.0;
-    else
-        m_relevance = static_cast<qreal>(remoteHaves) / localMissing;
+    const int remoteHaves = (peerPieces & (~allPieces)).count(true);
+    return static_cast<qreal>(remoteHaves) / localMissing;
 }
 
 qreal PeerInfo::relevance() const
