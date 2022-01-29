@@ -37,6 +37,8 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:
+          py7zrversion: '>=0.17'
+          aqtversion: '>=2'
           version: ${{ matrix.qt_version }}
 
       - name: Install libtorrent
