@@ -30,6 +30,7 @@
 #include "transferlistmodel.h"
 
 #include <QApplication>
+#include <QColor>
 #include <QDateTime>
 #include <QDebug>
 #include <QIcon>
