@@ -38,8 +38,8 @@ namespace
 {
     QColor dlPieceColor(const QColor &pieceColor)
     {
-        const QColor green {Qt::green};
-        return QColor::fromHsl(green.hslHue(), pieceColor.hslSaturation(), pieceColor.lightness());
+        const QColor limegreen {QColorConstants::Svg::limegreen};
+        return QColor::fromHsl(limegreen.hslHue(), pieceColor.hslSaturation(), pieceColor.lightness());
     }
 }
 
