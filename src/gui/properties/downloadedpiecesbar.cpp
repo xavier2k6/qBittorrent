@@ -38,7 +38,8 @@ namespace
 {
     QColor dlPieceColor(const QColor &pieceColor)
     {
-        const QColor yellow {QColorConstants::Svg::red};
+        const QColor red {QColorConstants::Svg::red};
+        return QColor::fromHsl(red.hslHue(), pieceColor.hslSaturation(), pieceColor.lightness());
     }
 }
 
