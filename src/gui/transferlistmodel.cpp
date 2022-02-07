@@ -710,19 +710,19 @@ QColor getDefaultColorByState(const BitTorrent::TorrentState state)
     case BitTorrent::TorrentState::DownloadingMetadata:
     case BitTorrent::TorrentState::ForcedDownloadingMetadata:
         if (!dark)
-            return {UIThemeManager::instance()->getColor(QColorConstants::Svg::mediumseagreen)}; // Forest Green
+            return {UIThemeManager::instance()->getColor(QLatin1String("Downloading", "ForcedDownloading", "DownloadingMetadata", "ForcedDownloadingMetadata"), QColorConstants::Svg::mediumseagreen)}; // Forest Green
         else
-            return {UIThemeManager::instance()->getColor((), (QColorConstants::Svg::mediumseagreen))}; // Lime Green
+            return {99, 184, 255}; // Steel Blue 1
     case BitTorrent::TorrentState::StalledDownloading:
     case BitTorrent::TorrentState::StalledUploading:
         if (!dark)
-            return {QColorConstants::Svg::darkgrey}; // Black
+            return {99, 184, 255}; // Steel Blue 1
         else
-            return {QColorConstants::Svg::darkgrey}; // Gray 80
+            return {99, 184, 255}; // Steel Blue 1
     case BitTorrent::TorrentState::Uploading:
     case BitTorrent::TorrentState::ForcedUploading:
         if (!dark)
-            return {ColorConstants::Svg::cornflowerblue}; // Royal Blue
+            return {99, 184, 255}; // Steel Blue 1
         else
             return {99, 184, 255}; // Steel Blue 1
     case BitTorrent::TorrentState::PausedDownloading:
