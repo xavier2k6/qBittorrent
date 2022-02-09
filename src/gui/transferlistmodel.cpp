@@ -709,47 +709,33 @@ QColor getDefaultColorByState(const BitTorrent::TorrentState state)
     case BitTorrent::TorrentState::ForcedDownloading:
     case BitTorrent::TorrentState::DownloadingMetadata:
     case BitTorrent::TorrentState::ForcedDownloadingMetadata:
-        if (!dark)
-            return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::mediumseagreen)}; // Forest Green
-        else
-            return {99, 184, 255}; // Steel Blue 1
+            return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::mediumseagreen)};
     case BitTorrent::TorrentState::StalledDownloading:
+            return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::gray)};
     case BitTorrent::TorrentState::StalledUploading:
-        if (!dark)
-            return {99, 184, 255}; // Steel Blue 1
-        else
-            return {99, 184, 255}; // Steel Blue 1
+            return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::lightgray)};
     case BitTorrent::TorrentState::Uploading:
     case BitTorrent::TorrentState::ForcedUploading:
-        if (!dark)
-            return {99, 184, 255}; // Steel Blue 1
-        else
-            return {99, 184, 255}; // Steel Blue 1
+            return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::cornflowerblue)};
     case BitTorrent::TorrentState::PausedDownloading:
-        return {250, 128, 114}; // Salmon
+        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::darksalmon)};
     case BitTorrent::TorrentState::PausedUploading:
-        if (!dark)
-            return {0, 0, 139}; // Dark Blue
-        else
-            return {79, 148, 205}; // Steel Blue 3
+        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::forestgreen)};
     case BitTorrent::TorrentState::Error:
     case BitTorrent::TorrentState::MissingFiles:
-        return {255, 0, 0}; // red
+        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::red)};
     case BitTorrent::TorrentState::QueuedDownloading:
     case BitTorrent::TorrentState::QueuedUploading:
     case BitTorrent::TorrentState::CheckingDownloading:
     case BitTorrent::TorrentState::CheckingUploading:
     case BitTorrent::TorrentState::CheckingResumeData:
     case BitTorrent::TorrentState::Moving:
-        if (!dark)
-            return {0, 128, 128}; // Teal
-        else
-            return {0, 205, 205}; // Cyan 3
+        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::teal)};
     case BitTorrent::TorrentState::Unknown:
-        return {255, 0, 0}; // red
+        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::red)};
     default:
         Q_ASSERT(false);
-        return {255, 0, 0}; // red
+        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::red)};
     }
 }
 
