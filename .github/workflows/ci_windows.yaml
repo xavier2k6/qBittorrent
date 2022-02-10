@@ -1,5 +1,8 @@
 name: CI - Windows
-on: [pull_request, push]
+on:
+  schedule:
+    - cron: '0 0 * * 1' # Weekly (Monday of every week at midnight)
+  workflow_dispatch: # Manual trigger, mainly for testing outside of scheduled workflow.
 
 jobs:
   ci:
