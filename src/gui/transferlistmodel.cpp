@@ -711,9 +711,9 @@ QColor getDefaultColorByState(const BitTorrent::TorrentState state)
     case BitTorrent::TorrentState::ForcedDownloadingMetadata:
         return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::limegreen)};
     case BitTorrent::TorrentState::StalledDownloading:
-        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::darkgrey)};
+        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::grey)};
     case BitTorrent::TorrentState::StalledUploading:
-        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::silver)};
+        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::darkgrey)};
     case BitTorrent::TorrentState::Uploading:
     case BitTorrent::TorrentState::ForcedUploading:
         return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::cornflowerblue)};
