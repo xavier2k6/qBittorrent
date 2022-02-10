@@ -1,7 +1,8 @@
 name: CI - Windows
 on:
   schedule:
-    - cron: '55 20 * * 4' # Weekly (Monday of every week at midnight)
+    - cron: '15 09,15,21 * * 2,4,6' # Runs every 15th minute past 09am/3pm/9pm on Tue, Thu and Sat.
+
   workflow_dispatch: # Manual trigger, mainly for testing outside of scheduled workflow.
 
 jobs:
