@@ -73,7 +73,7 @@ QVariant BaseLogModel::Message::type() const
 BaseLogModel::BaseLogModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_messages(MAX_VISIBLE_MESSAGES)
-    , m_timeForeground(UIThemeManager::instance()->getColor(QLatin1String("Log.TimeStamp"), QColorConstants::Svg::darkgrey))
+    , m_timeForeground(UIThemeManager::instance()->getColor(QLatin1String("Log.TimeStamp"), QColorConstants::Svg::grey))
 {
 }
 
