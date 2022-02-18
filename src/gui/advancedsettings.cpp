@@ -465,7 +465,7 @@ void AdvancedSettings::loadAdvancedSettings()
     m_spinBoxCheckingMemUsage.setMinimum(1);
     // When build as 32bit binary, set the maximum value lower to prevent crashes.
 #ifdef QBT_APP_64BIT
-    m_spinBoxCheckingMemUsage.setMaximum(4096);
+    m_spinBoxCheckingMemUsage.setMaximum(16384);
 #else
     // Allocate at most 128MiB out of the remaining 512MiB (see the cache part below)
     m_spinBoxCheckingMemUsage.setMaximum(128);
