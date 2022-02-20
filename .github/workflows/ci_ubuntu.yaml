@@ -9,12 +9,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["2.0.5", "1.2.15"]
+        libt_version: ["RC_2_0", "RC_1_2"]
         qbt_gui: ["GUI=ON", "GUI=OFF"]
-        qt_version: ["5.15.2", "6.2.0"]
+        qt_version: ["5.15.2", "6.2.3"]
         exclude:
-          - libt_version: "1.2.15"
-            qt_version: "6.2.0"
+          - libt_version: "RC_1_2"
+            qt_version: "6.2.3"
 
     steps:
       - name: Checkout repository
@@ -44,7 +44,7 @@ jobs:
       - name: Install libtorrent
         run: |
           git clone \
-            --branch v${{ matrix.libt_version }} \
+            --branch ${{ matrix.libt_version }} \
             --depth 1 \
             --recurse-submodules \
             https://github.com/arvidn/libtorrent.git
