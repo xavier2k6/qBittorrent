@@ -1824,8 +1824,8 @@ Manual: Various torrent properties (e.g. save path) must be assigned manually</s
                   <widget class="QToolButton" name="IpFilterRefreshBtn">
                    <property name="minimumSize">
                     <size>
-                     <width>0</width>
-                     <height>25</height>
+                     <width>20</width>
+                     <height>20</height>
                     </size>
                    </property>
                    <property name="toolTip">
