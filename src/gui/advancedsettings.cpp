@@ -64,6 +64,7 @@ namespace
         RESUME_DATA_STORAGE,
 #if defined(Q_OS_WIN)
         OS_MEMORY_PRIORITY,
+        MEMORY_WORKING_SET_LIMIT,
 #endif
         // network interface
         NETWORK_IFACE,
@@ -196,6 +197,8 @@ void AdvancedSettings::saveAdvancedSettings()
         break;
     }
     session->setOSMemoryPriority(prio);
+
+    static_cast<Application *>(QCoreApplication::instance())->setMemoryWorkingSetLimit(m_spinBoxMemoryWorkingSetLimit.value());
 #endif
     // Async IO threads
     session->setAsyncIOThreads(m_spinBoxAsyncIOThreads.value());
@@ -436,6 +439,16 @@ void AdvancedSettings::loadAdvancedSettings()
     addRow(OS_MEMORY_PRIORITY, (tr("Process memory priority (Windows >= 8 only)")
         + ' ' + makeLink("https://docs.microsoft.com/en-us/windows/win32/api/processthreadsapi/ns-processthreadsapi-memory_priority_information", "(?)"))
         , &m_comboBoxOSMemoryPriority);
+
+    m_spinBoxMemoryWorkingSetLimit.setRange(0, 100);
+    m_spinBoxMemoryWorkingSetLimit.setSingleStep(5);
+    m_spinBoxMemoryWorkingSetLimit.setSuffix(u"%"_qs);
+    m_spinBoxMemoryWorkingSetLimit.setSpecialValueText(tr("Auto"));
+    m_spinBoxMemoryWorkingSetLimit.setValue(static_cast<Application *>(QCoreApplication::instance())->memoryWorkingSetLimit());
+
+    addRow(MEMORY_WORKING_SET_LIMIT, (tr("Process memory working set limit")
+        + ' ' + makeLink("https://docs.microsoft.com/en-us/windows/win32/memory/working-set", "(?)"))
+        , &m_spinBoxMemoryWorkingSetLimit);
 #endif
 
     // Async IO threads
@@ -465,7 +478,7 @@ void AdvancedSettings::loadAdvancedSettings()
     m_spinBoxCheckingMemUsage.setMinimum(1);
     // When build as 32bit binary, set the maximum value lower to prevent crashes.
 #ifdef QBT_APP_64BIT
-    m_spinBoxCheckingMemUsage.setMaximum(16384);
+    m_spinBoxCheckingMemUsage.setMaximum(1024);
 #else
     // Allocate at most 128MiB out of the remaining 512MiB (see the cache part below)
     m_spinBoxCheckingMemUsage.setMaximum(128);

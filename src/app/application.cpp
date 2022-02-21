@@ -121,6 +121,9 @@ Application::Application(int &argc, char **argv)
     , m_running(false)
     , m_shutdownAct(ShutdownDialogAction::Exit)
     , m_commandLineArgs(parseCommandLine(this->arguments()))
+#ifdef Q_OS_WIN
+    , m_storeMemoryWorkingSetLimit(SETTINGS_KEY("MemoryWorkingSetLimit"))
+#endif
     , m_storeFileLoggerEnabled(FILELOGGER_SETTINGS_KEY("Enabled"))
     , m_storeFileLoggerBackup(FILELOGGER_SETTINGS_KEY("Backup"))
     , m_storeFileLoggerDeleteOld(FILELOGGER_SETTINGS_KEY("DeleteOld"))
@@ -203,6 +206,23 @@ const QBtCommandLineParameters &Application::commandLineArgs() const
 {
     return m_commandLineArgs;
 }
+
+#ifdef Q_OS_WIN
+int Application::memoryWorkingSetLimit() const
+{
+    return std::clamp(m_storeMemoryWorkingSetLimit.get(0), 0, 100);
+}
+
+void Application::setMemoryWorkingSetLimit(int size)
+{
+    size = std::clamp(size, 0, 100);
+    if (size == memoryWorkingSetLimit())
+        return;
+
+    m_storeMemoryWorkingSetLimit = size;
+    applyMemoryWorkingSetLimit();
+}
+#endif
 
 bool Application::isFileLoggerEnabled() const
 {
@@ -602,6 +622,10 @@ void Application::processParams(const QStringList &params)
 
 int Application::exec(const QStringList &params)
 {
+#ifdef Q_OS_WIN
+    applyMemoryWorkingSetLimit();
+#endif
+
     Net::ProxyConfigurationManager::initInstance();
     Net::DownloadManager::initInstance();
     IconProvider::initInstance();
@@ -768,6 +792,64 @@ void Application::shutdownCleanup(QSessionManager &manager)
     // aboutToQuit() is never emitted if the user hits "Cancel" in
     // the above dialog.
     QTimer::singleShot(0, qApp, &QCoreApplication::quit);
+}
+#endif
+
+#ifdef Q_OS_WIN
+namespace
+{
+    std::uint64_t autoMemoryWorkingSetSize(const std::uint64_t memorySize)
+    {
+        const std::uint64_t GB = 1024 * 1024 * 1024;
+
+        return (memorySize <= (4 * GB))
+                ? memorySize / 2
+                : (2 * GB) + (memorySize / 10);
+    }
+}
+
+void Application::applyMemoryWorkingSetLimit()
+{
+    MEMORYSTATUSEX statex;
+    statex.dwLength = sizeof(statex);
+    if (!::GlobalMemoryStatusEx(&statex))
+    {
+        const DWORD errorCode = ::GetLastError();
+        QString reason = tr("Error %1.").arg(errorCode);
+        LPVOID lpMsgBuf = nullptr;
+        if (::FormatMessageW((FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS)
+                         , nullptr, ::GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), reinterpret_cast<LPWSTR>(&lpMsgBuf), 0, nullptr))
+        {
+            reason = QString::fromWCharArray(reinterpret_cast<LPWSTR>(lpMsgBuf)).trimmed();
+            ::LocalFree(lpMsgBuf);
+        }
+        LogMsg(tr("Failed to set Memory Working Set limit. Reason: %1").arg(reason), Log::WARNING);
+        return;
+    }
+
+    const int MB = 1024 * 1024;
+    const int limit = memoryWorkingSetLimit();
+    const SIZE_T maxSize = ((limit <= 0) ? autoMemoryWorkingSetSize(statex.ullTotalPhys) : (statex.ullTotalPhys * limit / 100));
+    const SIZE_T minSize = (maxSize < (64 * MB)) ? maxSize : (64 * MB);
+    if (::SetProcessWorkingSetSizeEx(::GetCurrentProcess(), minSize, maxSize, QUOTA_LIMITS_HARDWS_MAX_ENABLE))
+    {
+        const QString displayValue = (limit <= 0) ? tr("Auto") : (QString::number(limit) + u'%');
+        LogMsg(tr("Memory Working Set limit is successfully applied. Used value: %1 (%2 MB).")
+               .arg(displayValue, QString::number(maxSize / MB)), Log::INFO);
+    }
+    else
+    {
+        const DWORD errorCode = ::GetLastError();
+        QString reason = tr("Error %1.").arg(errorCode);
+        LPVOID lpMsgBuf = nullptr;
+        if (::FormatMessageW((FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS)
+                         , nullptr, errorCode, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), reinterpret_cast<LPWSTR>(&lpMsgBuf), 0, nullptr))
+        {
+            reason = QString::fromWCharArray(reinterpret_cast<LPWSTR>(lpMsgBuf)).trimmed();
+            ::LocalFree(lpMsgBuf);
+        }
+        LogMsg(tr("Failed to set Memory Working Set limit. Reason: %1").arg(reason), Log::WARNING);
+    }
 }
 #endif
 

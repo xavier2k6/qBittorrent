@@ -40,6 +40,7 @@
 #include <Windows.h>
 #include <wincrypt.h>
 #include <iphlpapi.h>
+#include <Psapi.h>
 #endif
 
 #include <libtorrent/alert_types.hpp>
@@ -5186,6 +5187,29 @@ void Session::handleStorageMovedFailedAlert(const lt::storage_moved_failed_alert
 
 void Session::handleStateUpdateAlert(const lt::state_update_alert *p)
 {
+#ifdef Q_OS_WIN
+    const int MB = 1024 * 1024;
+
+    HANDLE hProcess = ::GetCurrentProcess();
+
+    MEMORYSTATUSEX statex;
+    statex.dwLength = sizeof(statex);
+    if (::GlobalMemoryStatusEx(&statex))
+    {
+        qDebug("*** Physical memory total size: %lld MB", statex.ullTotalPhys / MB);
+        qDebug("*** Physical memory free size: %lld MB", statex.ullAvailPhys / MB);
+        qDebug("*** Memory in use: %ld %", statex.dwMemoryLoad);
+    }
+
+    PROCESS_MEMORY_COUNTERS pmc;
+    if (::GetProcessMemoryInfo(hProcess, &pmc, sizeof(pmc)))
+    {
+        qDebug("*** PageFaultCount: %lld", pmc.PageFaultCount);
+        qDebug("*** PeakWorkingSetSize: %lld MB", pmc.PeakWorkingSetSize / MB);
+        qDebug("*** WorkingSetSize: %lld MB", pmc.WorkingSetSize / MB);
+    }
+#endif
+
     QVector<Torrent *> updatedTorrents;
     updatedTorrents.reserve(static_cast<decltype(updatedTorrents)::size_type>(p->status.size()));
 
