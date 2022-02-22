@@ -441,7 +441,7 @@ void AdvancedSettings::loadAdvancedSettings()
         , &m_comboBoxOSMemoryPriority);
 
     m_spinBoxMemoryWorkingSetLimit.setRange(0, 100);
-    m_spinBoxMemoryWorkingSetLimit.setSingleStep(.5);
+    m_spinBoxMemoryWorkingSetLimit.setSingleStep(1);
     m_spinBoxMemoryWorkingSetLimit.setSuffix(u"%"_qs);
     m_spinBoxMemoryWorkingSetLimit.setSpecialValueText(tr("Auto"));
     m_spinBoxMemoryWorkingSetLimit.setValue(static_cast<Application *>(QCoreApplication::instance())->memoryWorkingSetLimit());
