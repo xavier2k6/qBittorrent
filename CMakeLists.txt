@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16 FATAL_ERROR) # Policies <= CMP0097 default to NEW
+cmake_minimum_required(VERSION 3.22 FATAL_ERROR) # Policies <= default to NEW
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 
@@ -20,7 +20,7 @@ set(minLibtorrentVersion 2.0.4)
 set(minZlibVersion 1.2.11)
 
 # features (some are platform-specific)
-include(CheckCXXSourceCompiles) # TODO: migrate to CheckSourceCompiles in CMake >= 3.19
+include(CheckSourceCompiles)
 include(FeatureSummary)
 include(FeatureOptionsSetup)
 feature_option(QT6 "Use Qt6" OFF)
@@ -38,7 +38,8 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
         OFF "NOT GUI" OFF
     )
     if (STACKTRACE)
-        check_cxx_source_compiles(
+        check_source_compiles(
+            CXX
             "#include <execinfo.h>
             int main(){return 0;}"
             QBITTORRENT_HAS_EXECINFO_H
