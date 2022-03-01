@@ -726,7 +726,7 @@ QColor getDefaultColorByState(const BitTorrent::TorrentState state)
         return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::red)};
     case BitTorrent::TorrentState::QueuedDownloading:
     case BitTorrent::TorrentState::QueuedUploading:
-        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::tan)};
+        return {UIThemeManager::instance()->getColor(QLatin1String(), QColorConstants::Svg::darkkhaki)};
     case BitTorrent::TorrentState::CheckingDownloading:
     case BitTorrent::TorrentState::CheckingUploading:
     case BitTorrent::TorrentState::CheckingResumeData:
