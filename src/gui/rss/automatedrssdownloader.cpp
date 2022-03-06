@@ -534,7 +534,7 @@ void AutomatedRssDownloader::displayRulesListMenu()
         }
 
         menu->addSeparator();
-        menu->addAction(UIThemeManager::instance()->getIcon(u"edit-clear"_qs), tr("Clear downloaded episodes...")
+        menu->addAction(UIThemeManager::instance()->getIcon(u"list-remove"_qs), tr("Clear downloaded episodes...")
             , this, &AutomatedRssDownloader::clearSelectedRuleDownloadedEpisodeList);
     }
 
@@ -759,7 +759,7 @@ void AutomatedRssDownloader::updateMustLineValidity()
     else
     {
         m_ui->lineContains->setStyleSheet(u"QLineEdit { color: #ff0000; }"_qs);
-        m_ui->labelMustStat->setPixmap(UIThemeManager::instance()->getIcon(u"task-attention"_qs).pixmap(16, 16));
+        m_ui->labelMustStat->setPixmap(UIThemeManager::instance()->getIcon(u"dialog-warning"_qs).pixmap(16, 16));
         m_ui->labelMustStat->setToolTip(error);
     }
 }
@@ -806,7 +806,7 @@ void AutomatedRssDownloader::updateMustNotLineValidity()
     else
     {
         m_ui->lineNotContains->setStyleSheet(u"QLineEdit { color: #ff0000; }"_qs);
-        m_ui->labelMustNotStat->setPixmap(UIThemeManager::instance()->getIcon(u"task-attention"_qs).pixmap(16, 16));
+        m_ui->labelMustNotStat->setPixmap(UIThemeManager::instance()->getIcon(u"dialog-warning"_qs).pixmap(16, 16));
         m_ui->labelMustNotStat->setToolTip(error);
     }
 }
@@ -824,7 +824,7 @@ void AutomatedRssDownloader::updateEpisodeFilterValidity()
     else
     {
         m_ui->lineEFilter->setStyleSheet(u"QLineEdit { color: #ff0000; }"_qs);
-        m_ui->labelEpFilterStat->setPixmap(UIThemeManager::instance()->getIcon(u"task-attention"_qs).pixmap(16, 16));
+        m_ui->labelEpFilterStat->setPixmap(UIThemeManager::instance()->getIcon(u"dialog-warning"_qs).pixmap(16, 16));
     }
 }
 

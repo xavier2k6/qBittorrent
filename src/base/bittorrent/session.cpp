@@ -1311,8 +1311,13 @@ void Session::loadLTSettings(lt::settings_pack &settingsPack)
 
     lt::settings_pack::io_buffer_mode_t mode = useOSCache() ? lt::settings_pack::enable_os_cache
                                                               : lt::settings_pack::disable_os_cache;
+
     settingsPack.set_int(lt::settings_pack::disk_io_read_mode, mode);
+#if defined (Q_OS_WIN) && defined (QBT_USES_LIBTORRENT2)
+    settingsPack.set_int(lt::settings_pack::disk_io_write_mode, lt::settings_pack::write_through);
+#else
     settingsPack.set_int(lt::settings_pack::disk_io_write_mode, mode);
+#endif
 
 #ifndef QBT_USES_LIBTORRENT2
     settingsPack.set_bool(lt::settings_pack::coalesce_reads, isCoalesceReadWriteEnabled());

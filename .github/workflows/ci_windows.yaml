@@ -1,10 +1,5 @@
 name: CI - Windows
-
 on: [pull_request, push]
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-  cancel-in-progress: ${{ github.head_ref != '' }}
 
 jobs:
   ci:
@@ -14,7 +9,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["2.0.6", "1.2.16"]
+        libt_version: ["RC_2_0"]
+        qt_version: ["6.3.1"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
@@ -74,15 +70,16 @@ jobs:
           move "${{ github.workspace }}/../boost_*" "${{ env.boost_path }}"
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
-          aqtversion: '==2.1.0'
-          version: "6.3.0"
+          aqtversion: '>=2.1.0'
+          py7zrversion: '>=0.18.3'
+          version: ${{ matrix.qt_version }}
 
       - name: Install libtorrent
         run: |
           git clone `
-            --branch v${{ matrix.libt_version }} `
+            --branch ${{ matrix.libt_version }} `
             --depth 1 `
             --recurse-submodules `
             https://github.com/arvidn/libtorrent.git
@@ -90,7 +87,7 @@ jobs:
           cmake `
             -B build `
             -G "Ninja" `
-            -DCMAKE_BUILD_TYPE=RelWithDebInfo `
+            -DCMAKE_BUILD_TYPE=RelASan `
             -DCMAKE_CXX_FLAGS=/guard:cf `
             -DCMAKE_EXPORT_COMPILE_COMMANDS=ON `
             -DCMAKE_INSTALL_PREFIX="${{ env.libtorrent_path }}" `
@@ -108,7 +105,7 @@ jobs:
           cmake `
             -B build `
             -G "Ninja" `
-            -DCMAKE_BUILD_TYPE=RelWithDebInfo `
+            -DCMAKE_BUILD_TYPE=RelASan `
             -DCMAKE_EXPORT_COMPILE_COMMANDS=ON `
             -DCMAKE_TOOLCHAIN_FILE="${{ env.RUNVCPKG_VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake" `
             -DBOOST_ROOT="${{ env.boost_path }}" `
@@ -156,5 +153,5 @@ jobs:
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: qBittorrent-CI_Windows-x64_libtorrent-${{ matrix.libt_version }}
+          name: qBittorrent-CI_Windows-x64_libtorrent-${{ matrix.libt_version }}_Qt-${{ matrix.qt_version }}
           path: upload
