@@ -9,7 +9,7 @@ concurrency:
 jobs:
   ci:
     name: Build
-    runs-on: macos-latest
+    runs-on: macos-12
 
     strategy:
       fail-fast: false
