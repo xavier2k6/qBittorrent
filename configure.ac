@@ -200,7 +200,7 @@ PKG_CHECK_MODULES(openssl,
                   LIBS="$openssl_LIBS $LIBS"])
 
 PKG_CHECK_MODULES(zlib,
-                 [zlib >= 1.2.11],
+                 [zlib >= 1.2.12],
                  [CXXFLAGS="$zlib_CFLAGS $CXXFLAGS"
                  LIBS="$zlib_LIBS $LIBS"])
 

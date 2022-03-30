@@ -17,7 +17,7 @@ set(minQt6Version 6.2)
 set(minOpenSSLVersion 1.1.1)
 set(minLibtorrent1Version 1.2.14)
 set(minLibtorrentVersion 2.0.4)
-set(minZlibVersion 1.2.11)
+set(minZlibVersion 1.2.12)
 
 # features (some are platform-specific)
 include(CheckCXXSourceCompiles) # TODO: migrate to CheckSourceCompiles in CMake >= 3.19
