@@ -16,14 +16,14 @@ jobs:
       matrix:
         libt_version: ["2.0.5", "1.2.15"]
         qbt_gui: ["GUI=ON", "GUI=OFF"]
-        qt_version: ["5.15.2", "6.2.0"]
+        qt_version: ["5.15.2", "6.3.0"]
         exclude:
           - libt_version: "1.2.15"
-            qt_version: "6.2.0"
+            qt_version: "6.3.0"
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
-      openssl_root: /usr/local/opt/openssl@1.1
+      openssl_root: /usr/local/opt/openssl@3
 
     steps:
       - name: Checkout repository
@@ -34,7 +34,7 @@ jobs:
           brew update > /dev/null
           brew install \
             cmake ninja \
-            openssl@1.1 zlib
+            openssl@3 zlib
 
       - name: Setup ccache
         uses: Chocobo1/setup-ccache-action@v1
@@ -51,7 +51,7 @@ jobs:
           mv "${{ github.workspace }}/.."/boost_* "${{ env.boost_path }}"
 
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v3
         with:
           setup-python: false
           version: ${{ matrix.qt_version }}
