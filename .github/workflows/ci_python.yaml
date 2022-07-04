@@ -22,7 +22,7 @@ jobs:
       - name: Setup python (auxiliary scripts)
         uses: actions/setup-python@v5
         with:
-          python-version: '3'  # use default version
+          python-version: '3.13'  # use default version
 
       - name: Install tools (auxiliary scripts)
         run: pip install bandit isort pycodestyle pyflakes
@@ -56,7 +56,7 @@ jobs:
       - name: Setup python (search engine)
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.13'
 
       - name: Install tools (search engine)
         run: pip install bandit isort mypy pycodestyle pyflakes pyright
