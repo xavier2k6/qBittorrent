@@ -3,6 +3,7 @@
 # to consume common compile options/definitions
 
 # treat value specified by the CXX_STANDARD target property as a requirement by default
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 

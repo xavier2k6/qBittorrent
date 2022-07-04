@@ -13,7 +13,7 @@ repos:
           - ts
 
   - repo: https://github.com/pre-commit/pre-commit-hooks.git
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
     - id: check-json
       name: Check JSON files
@@ -63,7 +63,7 @@ repos:
         - ts
 
   - repo: https://github.com/codespell-project/codespell.git
-    rev: v2.2.6
+    rev: v2.3.0
     hooks:
     - id: codespell
       name: Check spelling (codespell)
@@ -88,7 +88,7 @@ repos:
         - ts
 
   - repo: https://github.com/crate-ci/typos.git
-    rev: v1.16.18
+    rev: v1.22.3
     hooks:
     - id: typos
       name: Check spelling (typos)
