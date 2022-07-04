@@ -65,3 +65,11 @@ struct std::hash<Tag>
         return qHash(tag.toString(), seed);
     }
 };
+
+#include <QDebug>
+
+inline QDebug operator<<(QDebug debug, const Tag &tag)
+{
+    debug << tag.toString();
+    return debug;
+}
