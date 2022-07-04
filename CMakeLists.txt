@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16 FATAL_ERROR) # Policies <= CMP0097 default to NEW
+cmake_minimum_required(VERSION 3.31 FATAL_ERROR)
 
 project(qBittorrent
     DESCRIPTION "The qBittorrent BitTorrent client"
@@ -7,12 +7,12 @@ project(qBittorrent
 )
 
 # version requirements - older versions may work, but you are on your own
-set(minBoostVersion 1.76)
-set(minQt6Version 6.6.0)
-set(minOpenSSLVersion 3.0.2)
-set(minLibtorrent1Version 1.2.19)
-set(minLibtorrentVersion 2.0.10)
-set(minZlibVersion 1.2.11)
+set(minBoostVersion 1.86)
+set(minQt6Version 6.8.0)
+set(minOpenSSLVersion 3.4.0)
+set(minLibtorrent1Version 1.2.20)
+set(minLibtorrentVersion 2.0.11)
+set(minZlibVersion 1.3.1)
 
 include(GNUInstallDirs)
 
