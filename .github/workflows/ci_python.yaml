@@ -22,7 +22,7 @@ jobs:
       - name: Setup python (auxiliary scripts)
         uses: actions/setup-python@v6
         with:
-          python-version: '3'  # use default version
+          python-version: '*'  # use default version
 
       - name: Install tools (auxiliary scripts)
         run: pip install bandit isort pycodestyle pyflakes
@@ -56,7 +56,7 @@ jobs:
       - name: Setup python (search engine)
         uses: actions/setup-python@v6
         with:
-          python-version: '3.9'
+          python-version: '*'
 
       - name: Install tools (search engine)
         working-directory: src/searchengine/nova3

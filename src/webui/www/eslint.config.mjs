@@ -19,7 +19,7 @@ export default [
             "**/*.mjs"
         ],
         languageOptions: {
-            ecmaVersion: 2022,
+            ecmaVersion: 2025,
             globals: {
                 ...Globals.browser
             }
