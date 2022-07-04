@@ -93,12 +93,12 @@ TransferListModel::TransferListModel(QObject *parent)
     : QAbstractListModel {parent}
     , m_statusStrings {
         {BitTorrent::TorrentState::Downloading, tr("Downloading")},
-        {BitTorrent::TorrentState::StalledDownloading, tr("Stalled", "Torrent is waiting for download to begin")},
+        {BitTorrent::TorrentState::StalledDownloading, tr("Stalled Downloading", "Torrent is waiting for download to begin")},
         {BitTorrent::TorrentState::DownloadingMetadata, tr("Downloading metadata", "Used when loading a magnet link")},
         {BitTorrent::TorrentState::ForcedDownloadingMetadata, tr("[F] Downloading metadata", "Used when forced to load a magnet link. You probably shouldn't translate the F.")},
         {BitTorrent::TorrentState::ForcedDownloading, tr("[F] Downloading", "Used when the torrent is forced started. You probably shouldn't translate the F.")},
         {BitTorrent::TorrentState::Uploading, tr("Seeding", "Torrent is complete and in upload-only mode")},
-        {BitTorrent::TorrentState::StalledUploading, tr("Seeding", "Torrent is complete and in upload-only mode")},
+        {BitTorrent::TorrentState::StalledUploading, tr("Stalled Uploading", "Torrent is complete and in upload-only mode")},
         {BitTorrent::TorrentState::ForcedUploading, tr("[F] Seeding", "Used when the torrent is forced started. You probably shouldn't translate the F.")},
         {BitTorrent::TorrentState::QueuedDownloading, tr("Queued", "Torrent is queued")},
         {BitTorrent::TorrentState::QueuedUploading, tr("Queued", "Torrent is queued")},
@@ -558,7 +558,7 @@ QVariant TransferListModel::data(const QModelIndex &index, const int role) const
     case AdditionalUnderlyingDataRole:
         return internalValue(torrent, index.column(), true);
     case Qt::DecorationRole:
-        if (index.column() == TR_NAME)
+        if (index.column() == TR_STATUS)
             return getIconByState(torrent->state());
         break;
     case Qt::ToolTipRole:
