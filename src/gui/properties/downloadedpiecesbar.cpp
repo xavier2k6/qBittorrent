@@ -41,8 +41,8 @@ namespace
 {
     QColor dlPieceColor(const QColor &pieceColor)
     {
-        const QColor green {Qt::green};
-        return QColor::fromHsl(green.hslHue(), pieceColor.hslSaturation(), pieceColor.lightness());
+        const QColor forestgreen {QColorConstants::Svg::forestgreen};
+        return QColor::fromHsl(forestgreen.hslHue(), pieceColor.hslSaturation(), pieceColor.lightness());
     }
 }
 
