@@ -273,7 +273,7 @@ QByteArray AutoDownloader::exportRulesToLegacyFormat() const
 
     QByteArray data;
     QDataStream out(&data, QIODevice::WriteOnly);
-    out.setVersion(QDataStream::Qt_4_5);
+    out.setVersion(QDataStream::Qt_5_15);
     out << dict;
 
     return data;
@@ -282,7 +282,7 @@ QByteArray AutoDownloader::exportRulesToLegacyFormat() const
 void AutoDownloader::importRulesFromLegacyFormat(const QByteArray &data)
 {
     QDataStream in(data);
-    in.setVersion(QDataStream::Qt_4_5);
+    in.setVersion(QDataStream::Qt_5_15);
     QVariantHash dict;
     in >> dict;
     if (in.status() != QDataStream::Ok)
