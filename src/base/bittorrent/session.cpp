@@ -1406,6 +1406,9 @@ void Session::initializeNativeSession()
 #ifdef QBT_USES_LIBTORRENT2
     switch (diskIOType())
     {
+    case DiskIOType::MTRW:
+        sessionParams.disk_io_constructor = customPReadDiskIOConstructor;
+        break;
     case DiskIOType::Posix:
         sessionParams.disk_io_constructor = customPosixDiskIOConstructor;
         break;
@@ -1417,7 +1420,9 @@ void Session::initializeNativeSession()
         break;
     }
 #endif
-    m_nativeSession = new lt::session(sessionParams, lt::session::paused);
+//    m_nativeSession = new lt::session(sessionParams, lt::session::paused);
+    m_nativeSession = new lt::session(sessionParams);
+    m_nativeSession->pause();
 
     LogMsg(tr("Peer ID: \"%1\"").arg(QString::fromStdString(peerId)), Log::INFO);
     LogMsg(tr("HTTP User-Agent: \"%1\"").arg(USER_AGENT), Log::INFO);
