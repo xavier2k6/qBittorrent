@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["2.0.7", "1.2.17"]
+        libt_version: ["85b9b729df5275abe5fcee5e4ccc18400e1b2bf2"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
@@ -81,7 +81,7 @@ jobs:
       - name: Install libtorrent
         run: |
           git clone `
-            --branch v${{ matrix.libt_version }} `
+            --branch ${{ matrix.libt_version }} `
             --depth 1 `
             --recurse-submodules `
             https://github.com/arvidn/libtorrent.git
