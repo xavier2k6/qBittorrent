@@ -163,34 +163,58 @@ SpeedPlotView::SpeedPlotView(QWidget *parent)
     : QGraphicsView {parent}
 {
     QPen greenPen;
-    greenPen.setWidthF(1.5);
-    greenPen.setColor(QColor(134, 196, 63));
+    greenPen.setWidthF(2);
+    greenPen.setColor(QColorConstants::Svg::green);
     QPen bluePen;
-    bluePen.setWidthF(1.5);
-    bluePen.setColor(QColor(50, 153, 255));
+    bluePen.setWidthF(2);
+    bluePen.setColor(QColorConstants::Svg::blue);
+    QPen darksalmonPen;
+    darksalmonPen.setWidthF(2);
+    darksalmonPen.setColor(QColorConstants::Svg::darksalmon);
+    QPen salmonPen;
+    salmonPen.setWidthF(2);
+    salmonPen.setColor(QColorConstants::Svg::salmon);
+    QPen darkorangePen;
+    darkorangePen.setWidthF(2);
+    darkorangePen.setColor(QColorConstants::Svg::darkorange);
+    QPen orangePen;
+    orangePen.setWidthF(2);
+    orangePen.setColor(QColorConstants::Svg::orange);
+    QPen darkredPen;
+    darkredPen.setWidthF(2);
+    darkredPen.setColor(QColorConstants::Svg::darkred);
+    QPen redPen;
+    redPen.setWidthF(2);
+    redPen.setColor(QColorConstants::Svg::red);
+    QPen darkorchidPen;
+    darkorchidPen.setWidthF(2);
+    darkorchidPen.setColor(QColorConstants::Svg::darkorchid);
+    QPen orchidPen;
+    orchidPen.setWidthF(2);
+    orchidPen.setColor(QColorConstants::Svg::orchid);
 
     m_properties[UP] = GraphProperties(tr("Total Upload"), bluePen);
     m_properties[DOWN] = GraphProperties(tr("Total Download"), greenPen);
 
-    bluePen.setStyle(Qt::DashLine);
-    greenPen.setStyle(Qt::DashLine);
-    m_properties[PAYLOAD_UP] = GraphProperties(tr("Payload Upload"), bluePen);
-    m_properties[PAYLOAD_DOWN] = GraphProperties(tr("Payload Download"), greenPen);
+    salmonPen.setStyle(Qt::DashLine);
+    darksalmonPen.setStyle(Qt::DashLine);
+    m_properties[PAYLOAD_UP] = GraphProperties(tr("Payload Upload"), salmonPen);
+    m_properties[PAYLOAD_DOWN] = GraphProperties(tr("Payload Download"), darksalmonPen);
 
-    bluePen.setStyle(Qt::DashDotLine);
-    greenPen.setStyle(Qt::DashDotLine);
-    m_properties[OVERHEAD_UP] = GraphProperties(tr("Overhead Upload"), bluePen);
-    m_properties[OVERHEAD_DOWN] = GraphProperties(tr("Overhead Download"), greenPen);
+    orangePen.setStyle(Qt::DashDotLine);
+    darkorangePen.setStyle(Qt::DashDotLine);
+    m_properties[OVERHEAD_UP] = GraphProperties(tr("Overhead Upload"), orangePen);
+    m_properties[OVERHEAD_DOWN] = GraphProperties(tr("Overhead Download"), darkorangePen);
 
-    bluePen.setStyle(Qt::DashDotDotLine);
-    greenPen.setStyle(Qt::DashDotDotLine);
-    m_properties[DHT_UP] = GraphProperties(tr("DHT Upload"), bluePen);
-    m_properties[DHT_DOWN] = GraphProperties(tr("DHT Download"), greenPen);
+    redPen.setStyle(Qt::DashDotDotLine);
+    darkredPen.setStyle(Qt::DashDotDotLine);
+    m_properties[DHT_UP] = GraphProperties(tr("DHT Upload"), redPen);
+    m_properties[DHT_DOWN] = GraphProperties(tr("DHT Download"), darkredPen);
 
-    bluePen.setStyle(Qt::DotLine);
-    greenPen.setStyle(Qt::DotLine);
-    m_properties[TRACKER_UP] = GraphProperties(tr("Tracker Upload"), bluePen);
-    m_properties[TRACKER_DOWN] = GraphProperties(tr("Tracker Download"), greenPen);
+    orchidPen.setStyle(Qt::DotLine);
+    darkorchidPen.setStyle(Qt::DotLine);
+    m_properties[TRACKER_UP] = GraphProperties(tr("Tracker Upload"), orchidPen);
+    m_properties[TRACKER_DOWN] = GraphProperties(tr("Tracker Download"), darkorchidPen);
 }
 
 void SpeedPlotView::setGraphEnable(GraphID id, bool enable)
@@ -322,7 +346,7 @@ void SpeedPlotView::paintEvent(QPaintEvent *)
     QPen gridPen;
     gridPen.setStyle(Qt::DashLine);
     gridPen.setWidthF(1);
-    gridPen.setColor(QColor(128, 128, 128, 128));
+    gridPen.setColor(QColorConstants::Svg::grey);
     painter.setPen(gridPen);
 
     painter.drawLine(fullRect.left(), rect.top(), rect.right(), rect.top());
