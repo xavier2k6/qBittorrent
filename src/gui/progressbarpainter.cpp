@@ -35,6 +35,7 @@
 
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
 #include <QProxyStyle>
+#include <QStyleFactory>
 #endif
 
 #include "base/global.h"
@@ -42,16 +43,16 @@
 ProgressBarPainter::ProgressBarPainter()
 {
 #if (defined(Q_OS_WIN) || defined(Q_OS_MACOS))
-    auto *fusionStyle = new QProxyStyle {u"fusion"_qs};
-    fusionStyle->setParent(&m_dummyProgressBar);
-    m_dummyProgressBar.setStyle(fusionStyle);
+    auto *fusionStyle = new QProxyStyle(QStyleFactory::create({u"fusion"_qs}));
+    fusionStyle->setParent(&QProgressBar);
+    &QProgressBar.setStyle(fusionStyle);
 #endif
 }
 
 void ProgressBarPainter::paint(QPainter *painter, const QStyleOptionViewItem &option, const QString &text, const int progress) const
 {
     QStyleOptionProgressBar styleOption;
-    styleOption.initFrom(&m_dummyProgressBar);
+    styleOption.initFrom(&QProgressBar);
     // QStyleOptionProgressBar fields
     styleOption.maximum = 100;
     styleOption.minimum = 0;
@@ -67,8 +68,8 @@ void ProgressBarPainter::paint(QPainter *painter, const QStyleOptionViewItem &op
     styleOption.palette.setCurrentColorGroup(isEnabled ? QPalette::Active : QPalette::Disabled);
 
     painter->save();
-    const QStyle *style = m_dummyProgressBar.style();
+    const QStyle *style = m_ProgressBar.style();
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, option.widget);
-    style->drawControl(QStyle::CE_ProgressBar, &styleOption, painter, &m_dummyProgressBar);
+    style->drawControl(QStyle::CE_ProgressBar, &styleOption, painter, &QProgressBar);
     painter->restore();
 }

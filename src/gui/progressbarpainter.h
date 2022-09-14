@@ -38,8 +38,4 @@ public:
     ProgressBarPainter();
 
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QString &text, int progress) const;
-
-private:
-    // for painting progressbar with stylesheet option, a dummy progress bar is required
-    QProgressBar m_dummyProgressBar;
 };
