@@ -142,8 +142,8 @@ LogMessageModel::LogMessageModel(QObject *parent)
     : BaseLogModel(parent)
     , m_foregroundForMessageTypes
     {
-        {Log::NORMAL, UIThemeManager::instance()->getColor(u"Log.Normal"_qs, QColorConstants::Svg::steelblue)},
-        {Log::INFO, UIThemeManager::instance()->getColor(u"Log.Info"_qs, QColorConstants::Svg::seagreen)},
+        {Log::NORMAL, UIThemeManager::instance()->getColor(u"Log.Normal"_qs, QColorConstants::Svg::forestgreen)},
+        {Log::INFO, UIThemeManager::instance()->getColor(u"Log.Info"_qs, QColorConstants::Svg::mediumslateblue)},
         {Log::WARNING, UIThemeManager::instance()->getColor(u"Log.Warning"_qs, QColorConstants::Svg::darkorange)},
         {Log::CRITICAL, UIThemeManager::instance()->getColor(u"Log.Critical"_qs, QColorConstants::Svg::red)}
     }
