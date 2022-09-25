@@ -66,7 +66,7 @@ namespace
         case BitTorrent::TorrentState::PausedDownloading:
             return QColorConstants::Svg::grey;
         case BitTorrent::TorrentState::PausedUploading:
-            return QColorConstants::Svg::darkslateblue;
+            return QColorConstants::Svg::maroon;
         case BitTorrent::TorrentState::QueuedDownloading:
         case BitTorrent::TorrentState::QueuedUploading:
             return QColorConstants::Svg::peru;
