@@ -94,6 +94,12 @@ void showSplashScreen();
 void adjustFileDescriptorLimit();
 #endif
 
+#if !defined(Q_OS_WIN) || defined(Q_OS_MAC)
+#include <QApplication>
+#include <QStyleFactory>
+       QApplication::setStyle(QStyleFactory::create("Fusion"));
+#endif
+
 // Main
 int main(int argc, char *argv[])
 {
