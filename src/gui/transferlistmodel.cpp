@@ -67,15 +67,16 @@ namespace
         case BitTorrent::TorrentState::PausedDownloading:
             return QColorConstants::Svg::grey;
         case BitTorrent::TorrentState::PausedUploading:
-            return QColorConstants::Svg::darkslateblue;
+            return QColorConstants::Svg::purple;
         case BitTorrent::TorrentState::QueuedDownloading:
         case BitTorrent::TorrentState::QueuedUploading:
-            return QColorConstants::Svg::peru;
+            return QColorConstants::Svg::lightcoral;
         case BitTorrent::TorrentState::CheckingDownloading:
         case BitTorrent::TorrentState::CheckingUploading:
         case BitTorrent::TorrentState::CheckingResumeData:
-        case BitTorrent::TorrentState::Moving:
             return QColorConstants::Svg::teal;
+        case BitTorrent::TorrentState::Moving:
+            return QColorConstants::Svg::darkgoldenrod;
         case BitTorrent::TorrentState::Error:
         case BitTorrent::TorrentState::MissingFiles:
         case BitTorrent::TorrentState::Unknown:
@@ -134,12 +135,12 @@ TransferListModel::TransferListModel(QObject *parent)
     , m_statusStrings
     {
           {BitTorrent::TorrentState::Downloading, tr("Downloading")},
-          {BitTorrent::TorrentState::StalledDownloading, tr("Stalled", "Torrent is waiting for download to begin")},
+          {BitTorrent::TorrentState::StalledDownloading, tr("Stalled Downloading", "Torrent is waiting for download to begin")},
           {BitTorrent::TorrentState::DownloadingMetadata, tr("Downloading metadata", "Used when loading a magnet link")},
           {BitTorrent::TorrentState::ForcedDownloadingMetadata, tr("[F] Downloading metadata", "Used when forced to load a magnet link. You probably shouldn't translate the F.")},
           {BitTorrent::TorrentState::ForcedDownloading, tr("[F] Downloading", "Used when the torrent is forced started. You probably shouldn't translate the F.")},
           {BitTorrent::TorrentState::Uploading, tr("Seeding", "Torrent is complete and in upload-only mode")},
-          {BitTorrent::TorrentState::StalledUploading, tr("Seeding", "Torrent is complete and in upload-only mode")},
+          {BitTorrent::TorrentState::StalledUploading, tr("Stalled Uploading", "Torrent is complete and in upload-only mode")},
           {BitTorrent::TorrentState::ForcedUploading, tr("[F] Seeding", "Used when the torrent is forced started. You probably shouldn't translate the F.")},
           {BitTorrent::TorrentState::QueuedDownloading, tr("Queued", "Torrent is queued")},
           {BitTorrent::TorrentState::QueuedUploading, tr("Queued", "Torrent is queued")},
@@ -157,6 +158,7 @@ TransferListModel::TransferListModel(QObject *parent)
     , m_completedIcon {UIThemeManager::instance()->getIcon(u"checked-completed"_qs)}
     , m_downloadingIcon {UIThemeManager::instance()->getIcon(u"downloading"_qs)}
     , m_errorIcon {UIThemeManager::instance()->getIcon(u"error"_qs)}
+    , m_movingIcon {UIThemeManager::instance()->getIcon(u"set-location"_qs)}
     , m_pausedIcon {UIThemeManager::instance()->getIcon(u"torrent-stop"_qs)}
     , m_queuedIcon {UIThemeManager::instance()->getIcon(u"queued"_qs)}
     , m_stalledDLIcon {UIThemeManager::instance()->getIcon(u"stalledDL"_qs)}
@@ -551,7 +553,7 @@ QVariant TransferListModel::data(const QModelIndex &index, const int role) const
     case AdditionalUnderlyingDataRole:
         return internalValue(torrent, index.column(), true);
     case Qt::DecorationRole:
-        if (index.column() == TR_NAME)
+        if (index.column() == TR_STATUS)
             return getIconByState(torrent->state());
         break;
     case Qt::ToolTipRole:
@@ -747,8 +749,9 @@ QIcon TransferListModel::getIconByState(const BitTorrent::TorrentState state) co
     case BitTorrent::TorrentState::CheckingDownloading:
     case BitTorrent::TorrentState::CheckingUploading:
     case BitTorrent::TorrentState::CheckingResumeData:
-    case BitTorrent::TorrentState::Moving:
         return m_checkingIcon;
+    case BitTorrent::TorrentState::Moving:
+        return m_movingIcon;
     case BitTorrent::TorrentState::Unknown:
     case BitTorrent::TorrentState::MissingFiles:
     case BitTorrent::TorrentState::Error:
