@@ -16,10 +16,10 @@ jobs:
       matrix:
         libt_version: ["2.0.8", "1.2.18"]
         qbt_gui: ["GUI=ON", "GUI=OFF"]
-        qt_version: ["5.15.2", "6.4.0"]
+        qt_version: ["5.15.2", "6.5.0"]
         exclude:
           - libt_version: "1.2.18"
-            qt_version: "6.4.0"
+            qt_version: "6.5.0"
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
