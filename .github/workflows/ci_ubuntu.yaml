@@ -19,9 +19,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["2.0.11", "1.2.20"]
+        libt_version: ["RC_2_0"]
         qbt_gui: ["GUI=ON", "GUI=OFF"]
-        qt_version: ["6.6.3"]
+        qt_version: ["6.10.0"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
@@ -52,7 +52,7 @@ jobs:
       - name: Install boost
         env:
           BOOST_MAJOR_VERSION: "1"
-          BOOST_MINOR_VERSION: "77"
+          BOOST_MINOR_VERSION: "88"
           BOOST_PATCH_VERSION: "0"
         run: |
           boost_url="https://archives.boost.io/release/${{ env.BOOST_MAJOR_VERSION }}.${{ env.BOOST_MINOR_VERSION }}.${{ env.BOOST_PATCH_VERSION }}/source/boost_${{ env.BOOST_MAJOR_VERSION }}_${{ env.BOOST_MINOR_VERSION }}_${{ env.BOOST_PATCH_VERSION }}.tar.gz"
@@ -79,7 +79,7 @@ jobs:
       - name: Install libtorrent
         run: |
           git clone \
-            --branch v${{ matrix.libt_version }} \
+            --branch ${{ matrix.libt_version }} \
             --depth 1 \
             --recurse-submodules \
             https://github.com/arvidn/libtorrent.git \
@@ -163,6 +163,7 @@ jobs:
       - name: Package AppImage
         run: |
           rm -f "${{ runner.workspace }}/Qt/${{ matrix.qt_version }}/gcc_64/plugins/sqldrivers/libqsqlmimer.so"
+          rm -f "${{ runner.workspace }}/Qt/${{ matrix.qt_version }}/gcc_64/plugins/sqldrivers/libqsqloci.so"
           ./linuxdeploy-x86_64.AppImage --appdir qbittorrent --plugin qt
           rm qbittorrent/apprun-hooks/*
           cp .github/workflows/helper/appimage/export_vars.sh qbittorrent/apprun-hooks/export_vars.sh
