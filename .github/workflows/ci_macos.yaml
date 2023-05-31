@@ -12,7 +12,7 @@ concurrency:
 jobs:
   ci:
     name: Build
-    runs-on: macos-latest
+    runs-on: macos-13
 
     strategy:
       fail-fast: false
@@ -23,7 +23,7 @@ jobs:
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
-      openssl_root: /usr/local/opt/openssl@3
+      openssl_root: "$(brew --prefix openssl@3)"
       libtorrent_path: "${{ github.workspace }}/../libtorrent"
 
     steps:
@@ -32,9 +32,6 @@ jobs:
 
       - name: Install dependencies
         uses: Wandalen/wretry.action@v3
-        env:
-           HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
-           HOMEBREW_NO_INSTALL_CLEANUP: 1
         with:
           attempt_delay: 20000
           attempt_limit: 6
