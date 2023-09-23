@@ -86,8 +86,6 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     )
     # provide variables for substitution in dist/mac/Info.plist
     get_target_property(EXECUTABLE_NAME qbt_app OUTPUT_NAME)
-    # This variable name should be changed once qmake is no longer used. Refer to the discussion in PR #14813
-    set(MACOSX_DEPLOYMENT_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
     set_target_properties(qbt_app PROPERTIES
         MACOSX_BUNDLE ON
         MACOSX_BUNDLE_BUNDLE_NAME "qBittorrent"

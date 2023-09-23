@@ -12,20 +12,25 @@ concurrency:
 jobs:
   ci:
     name: Build
-    runs-on: macos-latest
+    runs-on: macos-13
 
     strategy:
       fail-fast: false
       matrix:
         libt_version: ["2.0.9", "1.2.19"]
         qbt_gui: ["GUI=ON", "GUI=OFF"]
-        qt_version: ["6.5.2"]
+        qt_version: ["6.6.0"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
       openssl_root: /usr/local/opt/openssl@3
 
     steps:
+      - name: Use latest-stable Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
