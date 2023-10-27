@@ -110,7 +110,7 @@ void ProgramUpdater::rssDownloadFinished(const Net::DownloadResult &result)
 #ifdef Q_OS_MACOS
     const QString OS_TYPE = u"Mac OS X"_s;
 #elif defined(Q_OS_WIN)
-    const QString OS_TYPE = (::IsWindows7OrGreater() && QSysInfo::currentCpuArchitecture().endsWith(u"64"))
+    const QString OS_TYPE = (::IsWindows10OrGreater() && QSysInfo::currentCpuArchitecture().endsWith(u"64"))
         ? u"Windows x64"_s
         : u"Windows"_s;
 #endif
