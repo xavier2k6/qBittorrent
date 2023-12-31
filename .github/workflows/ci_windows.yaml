@@ -82,7 +82,7 @@ jobs:
           curl `
             -L `
             -o "${{ runner.temp }}/boost.tar.gz" `
-            "https://boostorg.jfrog.io/artifactory/main/release/1.83.0/source/boost_1_83_0.tar.gz"
+            "https://sourceforge.net/projects/boost/files/boost/1.84.0/boost_1_84_0.tar.gz"
           tar -xf "${{ runner.temp }}/boost.tar.gz" -C "${{ github.workspace }}/.."
           move "${{ github.workspace }}/../boost_*" "${{ env.boost_path }}"
 
