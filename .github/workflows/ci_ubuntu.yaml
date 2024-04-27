@@ -13,18 +13,18 @@ concurrency:
 jobs:
   ci:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["2.0.10", "1.2.19"]
+        libt_version: ["RC_2_0", "RC_1_2"]
         qbt_gui: ["GUI=ON", "GUI=OFF"]
-        qt_version: ["6.5.2"]
+        qt_version: ["6.5.3"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
-      harden_flags: "-D_FORTIFY_SOURCE=2 -D_GLIBCXX_ASSERTIONS"
+      harden_flags: "-D_FORTIFY_SOURCE=3 -D_GLIBCXX_ASSERTIONS"
       libtorrent_path: "${{ github.workspace }}/../libtorrent"
 
     steps:
@@ -49,7 +49,7 @@ jobs:
       - name: Install boost
         env:
           BOOST_MAJOR_VERSION: "1"
-          BOOST_MINOR_VERSION: "76"
+          BOOST_MINOR_VERSION: "86"
           BOOST_PATCH_VERSION: "0"
         run: |
           boost_url="https://archives.boost.io/release/${{ env.BOOST_MAJOR_VERSION }}.${{ env.BOOST_MINOR_VERSION }}.${{ env.BOOST_PATCH_VERSION }}/source/boost_${{ env.BOOST_MAJOR_VERSION }}_${{ env.BOOST_MINOR_VERSION }}_${{ env.BOOST_PATCH_VERSION }}.tar.gz"
@@ -73,7 +73,7 @@ jobs:
       - name: Install libtorrent
         run: |
           git clone \
-            --branch v${{ matrix.libt_version }} \
+            --branch ${{ matrix.libt_version }} \
             --depth 1 \
             --recurse-submodules \
             https://github.com/arvidn/libtorrent.git \
