@@ -20,7 +20,7 @@ jobs:
       - name: Setup python (auxiliary scripts)
         uses: actions/setup-python@v5
         with:
-          python-version: '3'  # use default version
+          python-version: '3.8.12'  # use default version
 
       - name: Install tools (auxiliary scripts)
         run: pip install bandit pycodestyle pyflakes
