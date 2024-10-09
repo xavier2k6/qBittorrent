@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["2.0.10", "1.2.19"]
+        libt_version: ["RC_2_0", "RC_1_2"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
@@ -95,14 +95,15 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: "6.7.3"
+          version: "6.8.0"
+          arch: win64_msvc2022_64
           archives: qtbase qtsvg qttools
           cache: true
 
       - name: Install libtorrent
         run: |
           git clone `
-            --branch v${{ matrix.libt_version }} `
+            --branch ${{ matrix.libt_version }} `
             --depth 1 `
             --recurse-submodules `
             https://github.com/arvidn/libtorrent.git `
@@ -170,7 +171,7 @@ jobs:
           mkdir upload/qBittorrent/plugins/sqldrivers
           copy "${{ env.Qt_ROOT_DIR }}/plugins/sqldrivers/qsqlite.dll" upload/qBittorrent/plugins/sqldrivers
           mkdir upload/qBittorrent/plugins/styles
-          copy "${{ env.Qt_ROOT_DIR }}/plugins/styles/qmodernwindowsstyle.dll" upload/qBittorrent/plugins/styles
+          copy "${{ env.Qt_ROOT_DIR }}/plugins/styles/q*style.dll" upload/qBittorrent/plugins/styles
           mkdir upload/qBittorrent/plugins/tls
           copy "${{ env.Qt_ROOT_DIR }}/plugins/tls/qschannelbackend.dll" upload/qBittorrent/plugins/tls
           # cmake additionals
