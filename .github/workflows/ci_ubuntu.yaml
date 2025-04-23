@@ -21,7 +21,7 @@ jobs:
       matrix:
         libt_version: ["2.0.11", "1.2.20"]
         qbt_gui: ["GUI=ON", "GUI=OFF"]
-        qt_version: ["6.5.2"]
+        qt_version: ["6.6.3"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
@@ -162,7 +162,7 @@ jobs:
 
       - name: Package AppImage
         run: |
-          ./linuxdeploy-x86_64.AppImage --appdir qbittorrent --plugin qt
+          ./linuxdeploy-x86_64.AppImage --appdir qbittorrent --plugin qt --exclude-library libqsqlmimer
           rm qbittorrent/apprun-hooks/*
           cp .github/workflows/helper/appimage/export_vars.sh qbittorrent/apprun-hooks/export_vars.sh
           NO_APPSTREAM=1 \
