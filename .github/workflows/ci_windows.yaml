@@ -11,14 +11,14 @@ concurrency:
 jobs:
   ci:
     name: Build
-    runs-on: windows-latest
+    runs-on: windows-2025
     permissions:
       actions: write
 
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["2.0.11", "1.2.20"]
+        libt_version: ["RC_2_0"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -82,7 +82,7 @@ jobs:
       - name: Install boost
         env:
           BOOST_MAJOR_VERSION: "1"
-          BOOST_MINOR_VERSION: "86"
+          BOOST_MINOR_VERSION: "89"
           BOOST_PATCH_VERSION: "0"
         run: |
           $boost_url="https://archives.boost.io/release/${{ env.BOOST_MAJOR_VERSION }}.${{ env.BOOST_MINOR_VERSION }}.${{ env.BOOST_PATCH_VERSION }}/source/boost_${{ env.BOOST_MAJOR_VERSION }}_${{ env.BOOST_MINOR_VERSION }}_${{ env.BOOST_PATCH_VERSION }}.tar.gz"
@@ -106,7 +106,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: "6.9.1"
+          version: "6.9.2"
           arch: win64_msvc2022_64
           archives: qtbase qtsvg qttools
           cache: true
@@ -114,7 +114,7 @@ jobs:
       - name: Install libtorrent
         run: |
           git clone `
-            --branch v${{ matrix.libt_version }} `
+            --branch ${{ matrix.libt_version }} `
             --depth 1 `
             --recurse-submodules `
             https://github.com/arvidn/libtorrent.git `
@@ -199,9 +199,13 @@ jobs:
           name: qBittorrent-CI_Windows-x64_libtorrent-${{ matrix.libt_version }}
           path: upload
 
+      - name: Install NSIS (if not present)
+        run: choco install nsis -y
+
       - name: Create installer
         run: |
           7z x -o"dist/windows/" "dist/windows/NSISPlugins.zip"
+          cd C:\Program Files (x86)\NSIS
           makensis /DQBT_DIST_DIR="../../upload/qBittorrent" /WX dist/windows/qbittorrent.nsi
 
       - name: Upload installer
