@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["2.0.11", "1.2.20"]
+        libt_version: ["RC_1_2"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           persist-credentials: false
 
@@ -106,7 +106,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: "6.9.1"
+          version: "6.9.2"
           arch: win64_msvc2022_64
           archives: qtbase qtsvg qttools
           cache: true
@@ -114,7 +114,7 @@ jobs:
       - name: Install libtorrent
         run: |
           git clone `
-            --branch v${{ matrix.libt_version }} `
+            --branch ${{ matrix.libt_version }} `
             --depth 1 `
             --recurse-submodules `
             https://github.com/arvidn/libtorrent.git `
