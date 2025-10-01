@@ -1,4 +1,4 @@
-name: CI - macOS
+name: CI - Ubuntu arm64 (libtorrent 2.0.x)
 
 on: [pull_request, push]
 
@@ -11,19 +11,21 @@ concurrency:
 jobs:
   ci:
     name: Build
-    runs-on: macos-latest
+    runs-on: ubuntu-24.04-arm
     permissions:
       actions: write
+      security-events: write
 
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["2.0.11", "1.2.20"]
+        libt_version: ["v2.0.11", "RC_2_0"]
         qbt_gui: ["GUI=ON", "GUI=OFF"]
-        qt_version: ["6.9.1"]
+        qt_version: ["6.9.3"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
+      harden_flags: "-D_FORTIFY_SOURCE=3 -D_GLIBCXX_ASSERTIONS"
       libtorrent_path: "${{ github.workspace }}/../libtorrent"
 
     steps:
@@ -33,18 +35,11 @@ jobs:
           persist-credentials: false
 
       - name: Install dependencies
-        uses: Wandalen/wretry.action@v3
-        env:
-           HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
-           HOMEBREW_NO_INSTALL_CLEANUP: 1
-        with:
-          attempt_delay: 20000
-          attempt_limit: 6
-          command: |
-            brew update > /dev/null
-            brew install \
-              openssl@3 zlib
-            # preinstalled on the image: cmake ninja
+        run: |
+          sudo apt update
+          sudo apt install \
+            build-essential cmake ninja-build \
+            libssl-dev libxkbcommon-x11-dev libxcb-cursor-dev zlib1g-dev
 
       - name: Setup ccache
         uses: Chocobo1/setup-ccache-action@v1
@@ -57,7 +52,7 @@ jobs:
       - name: Install boost
         env:
           BOOST_MAJOR_VERSION: "1"
-          BOOST_MINOR_VERSION: "86"
+          BOOST_MINOR_VERSION: "89"
           BOOST_PATCH_VERSION: "0"
         run: |
           boost_url="https://archives.boost.io/release/${{ env.BOOST_MAJOR_VERSION }}.${{ env.BOOST_MINOR_VERSION }}.${{ env.BOOST_PATCH_VERSION }}/source/boost_${{ env.BOOST_MAJOR_VERSION }}_${{ env.BOOST_MINOR_VERSION }}_${{ env.BOOST_PATCH_VERSION }}.tar.gz"
@@ -78,19 +73,19 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: ${{ matrix.qt_version }}
-          archives: qtbase qtdeclarative qtsvg qttools
-          # Not sure why Qt made a hard dependency on qtdeclarative, try removing it when Qt > 6.4.0
+          archives: icu qtbase qtdeclarative qtsvg qttools
           cache: true
 
       - name: Install libtorrent
         run: |
           git clone \
-            --branch v${{ matrix.libt_version }} \
+            --branch ${{ matrix.libt_version }} \
             --depth 1 \
             --recurse-submodules \
             https://github.com/arvidn/libtorrent.git \
             ${{ env.libtorrent_path }}
           cd ${{ env.libtorrent_path }}
+          CXXFLAGS="$CXXFLAGS ${{ env.harden_flags }}" \
           cmake \
             -B build \
             -G "Ninja" \
@@ -105,7 +100,7 @@ jobs:
 
       - name: Build qBittorrent
         run: |
-          CXXFLAGS="$CXXFLAGS -DQT_FORCE_ASSERTS -Werror -Wno-error=deprecated-declarations" \
+          CXXFLAGS="$CXXFLAGS ${{ env.harden_flags }} -DQT_FORCE_ASSERTS -Werror" \
           LDFLAGS="$LDFLAGS -gz" \
           cmake \
             -B build \
@@ -113,50 +108,56 @@ jobs:
             -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
             -DBOOST_ROOT="${{ env.boost_path }}/lib/cmake" \
+            -DCMAKE_INSTALL_PREFIX="/usr" \
             -DTESTING=ON \
             -DVERBOSE_CONFIGURE=ON \
             -D${{ matrix.qbt_gui }}
           cmake --build build --target qbt_update_translations
           cmake --build build
           cmake --build build --target check
+          DESTDIR="qbittorrent" cmake --install build
 
       - name: Prepare build artifacts
         run: |
-          appName="qbittorrent"
-          if [ "${{ matrix.qbt_gui }}" = "GUI=OFF" ]; then
-            appName="qbittorrent-nox"
-          fi
-          pushd build
-          # packaging
-          macdeployqt "$appName.app" -no-strip
-          # code signing
-          xattr -cr "$appName.app"
-          codesign --force --sign - \
-            "$appName.app" \
-            "$appName.app/Contents/Frameworks"/* \
-            "$appName.app/Contents/MacOS/$appName"
-          codesign --verify --deep --strict -v "$appName.app"
-          # create .dmg
-          PACKAGE_RETRY=0
-          while [ "$PACKAGE_RETRY" -lt "3" ]; do
-            if hdiutil create -fs HFS+ -srcfolder "$appName.app" -volname "$appName" "$appName.dmg"; then
-              break
-            fi
-            sleep 5
-            PACKAGE_RETRY=$((PACKAGE_RETRY + 1))
-            echo "Retry $PACKAGE_RETRY..."
-          done
-          popd
-          # prepare upload folder
           mkdir upload
-          cp "build/$appName.dmg" upload
           mkdir upload/cmake
           cp build/compile_commands.json upload/cmake
           mkdir upload/cmake/libtorrent
           cp ${{ env.libtorrent_path }}/build/compile_commands.json upload/cmake/libtorrent
 
+      - name: Install AppImage
+        run: |
+          curl \
+            -L \
+            -Z \
+            -O https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-aarch64.AppImage \
+            -O https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-aarch64.AppImage \
+            -O https://github.com/linuxdeploy/linuxdeploy-plugin-appimage/releases/download/continuous/linuxdeploy-plugin-appimage-aarch64.AppImage
+          chmod +x \
+            linuxdeploy-aarch64.AppImage \
+            linuxdeploy-plugin-qt-aarch64.AppImage \
+            linuxdeploy-plugin-appimage-aarch64.AppImage
+
+      - name: Prepare files for AppImage
+        if: matrix.qbt_gui == 'GUI=OFF'
+        run: |
+          mkdir -p qbittorrent/usr/share/applications
+          cp .github/workflows/helper/appimage/org.qbittorrent.qBittorrent.desktop qbittorrent/usr/share/applications/org.qbittorrent.qBittorrent.desktop
+          mkdir -p qbittorrent/usr/share/icons/hicolor/scalable/apps
+          cp dist/unix/menuicons/scalable/apps/qbittorrent.svg qbittorrent/usr/share/icons/hicolor/scalable/apps/qbittorrent.svg
+
+      - name: Package AppImage
+        run: |
+          rm -f "${{ runner.workspace }}/Qt/${{ matrix.qt_version }}/gcc_64/plugins/sqldrivers/libqsqlmimer.so"
+          ./linuxdeploy-aarch64.AppImage --appdir qbittorrent --plugin qt
+          rm qbittorrent/apprun-hooks/*
+          cp .github/workflows/helper/appimage/export_vars.sh qbittorrent/apprun-hooks/export_vars.sh
+          NO_APPSTREAM=1 \
+            OUTPUT=upload/qbittorrent-CI_Ubuntu_arm64.AppImage \
+            ./linuxdeploy-aarch64.AppImage --appdir qbittorrent --output appimage
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: qBittorrent-CI_macOS_${{ matrix.qbt_gui }}_libtorrent-${{ matrix.libt_version }}_Qt-${{ matrix.qt_version }}
+          name: qBittorrent-CI_Ubuntu-aarch64_${{ matrix.qbt_gui }}_libtorrent-${{ matrix.libt_version }}_Qt-${{ matrix.qt_version }}
           path: upload

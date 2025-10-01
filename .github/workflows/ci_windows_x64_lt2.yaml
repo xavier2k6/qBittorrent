@@ -1,4 +1,4 @@
-name: CI - Windows
+name: CI - Windows x64 (libtorrent 2.0.x)
 
 on: [pull_request, push]
 
@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["2.0.11", "1.2.20"]
+        libt_version: ["v2.0.11", "RC_2_0"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
@@ -33,6 +33,8 @@ jobs:
 
       - name: Setup devcmd
         uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
 
       - name: Install build tools
         run: |
@@ -82,7 +84,7 @@ jobs:
       - name: Install boost
         env:
           BOOST_MAJOR_VERSION: "1"
-          BOOST_MINOR_VERSION: "86"
+          BOOST_MINOR_VERSION: "89"
           BOOST_PATCH_VERSION: "0"
         run: |
           $boost_url="https://archives.boost.io/release/${{ env.BOOST_MAJOR_VERSION }}.${{ env.BOOST_MINOR_VERSION }}.${{ env.BOOST_PATCH_VERSION }}/source/boost_${{ env.BOOST_MAJOR_VERSION }}_${{ env.BOOST_MINOR_VERSION }}_${{ env.BOOST_PATCH_VERSION }}.tar.gz"
@@ -106,7 +108,7 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          version: "6.9.1"
+          version: "6.9.3"
           arch: win64_msvc2022_64
           archives: qtbase qtsvg qttools
           cache: true
@@ -114,7 +116,7 @@ jobs:
       - name: Install libtorrent
         run: |
           git clone `
-            --branch v${{ matrix.libt_version }} `
+            --branch ${{ matrix.libt_version }} `
             --depth 1 `
             --recurse-submodules `
             https://github.com/arvidn/libtorrent.git `
