@@ -47,7 +47,9 @@
 !define /ifndef QBT_NSIS_PLUGINS_DIR "NSISPlugins"
 
 Unicode true
-ManifestDPIAware true
+# ManifestDPIAware true
+ManifestDPIAwareness PerMonitorV2
+ManifestSupportedOS "{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}"  # Windows 10
 
 !ifdef USE_UPX
 !packhdr "$%TEMP%\exehead.tmp" 'upx.exe -9 --best --ultra-brute "$%TEMP%\exehead.tmp"'
