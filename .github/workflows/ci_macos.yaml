@@ -19,16 +19,12 @@ jobs:
       fail-fast: false
       matrix:
         libtorrent:
-          - version: "2.0.11"
+          - version: "master"
             boost_major_version: "1"
             boost_minor_version: "90"
             boost_patch_version: "0"
-          - version: "1.2.20"
-            boost_major_version: "1"
-            boost_minor_version: "86"
-            boost_patch_version: "0"
         qbt_gui: ["GUI=ON", "GUI=OFF"]
-        qt_version: ["6.10.1"]
+        qt_version: ["6.10.3"]
 
     env:
       boost_path: "${{ github.workspace }}/../boost"
@@ -90,7 +86,7 @@ jobs:
       - name: Install libtorrent
         run: |
           git clone \
-            --branch v${{ matrix.libtorrent.version }} \
+            --branch ${{ matrix.libtorrent.version }} \
             --depth 1 \
             --recurse-submodules \
             https://github.com/arvidn/libtorrent.git \
