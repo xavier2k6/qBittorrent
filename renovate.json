@@ -1,0 +1,9 @@
+// https://docs.renovatebot.com/config-presets/#github-hosted-presets
+// https://docs.renovatebot.com/config-presets/#github
+// renovate.json must be in repo root when in a fork
+{
+  "extends": [
+    "github>xavier2k6/renovate:default.json"
+  ],
+  "forkProcessing": "enabled"
+}
