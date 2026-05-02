@@ -3,7 +3,7 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
-    commit-message:
+    commit-message: "Bump action versions"
       prefix: "GHA CI"
     groups:
       GHA_CI-dependency-update:
@@ -16,7 +16,7 @@ updates:
 
   - package-ecosystem: "pre-commit"
     directory: "/"
-    commit-message:
+    commit-message: "Bump pre-commit hook versions"
       prefix: "GHA CI"
     groups:
       GHA_CI-dependency-update:
